@@ -65,12 +65,12 @@ jobs:
         id: deployment
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/deploy-pages@v4
-      - name: Rollback on smoke failure
-        if: failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: |
-          echo "Smoke test failed — rolling back gh-pages"
-          git fetch origin gh-pages --depth=2
-          git push --force-with-lease origin HEAD~1:gh-pages
       - name: Smoke test
+        id: smoke
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: node scripts/post-deploy-smoke.mjs
+      - name: Flag failed deploy
+        if: always() && steps.smoke.outcome == 'failure'
+        run: |
+          echo "::error::Post-deploy smoke test failed — the live site may be serving a bad build. GitHub Pages artifact deploys cannot be auto-rolled-back via git; re-run a deploy from a known-good commit."
+          exit 1

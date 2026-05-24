@@ -2,8 +2,9 @@
 * @4444j99
 
 # Quality and security governance contracts
-.github/workflows/quality.yml @4444j99
-.github/workflows/security-drift.yml @4444j99
+.github/workflows/ci.yml @4444j99
+.github/workflows/monitor.yml @4444j99
+.github/workflows/refresh-data.yml @4444j99
 .github/pull_request_template.md @4444j99
 .quality/security-policy.json @4444j99
 .quality/ratchet-policy.json @4444j99

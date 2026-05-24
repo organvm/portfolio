@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Advance or sync the quality ratchet default phase across policy, workflow, and CI.
- * Updates: ratchet-policy.json defaultPhase, quality.yml QUALITY_PHASE, README.md thresholds.
+ * Updates: ratchet-policy.json defaultPhase, ci.yml QUALITY_PHASE, README.md thresholds.
  *
  * Usage:
  *   node scripts/advance-ratchet-phase.mjs --phase W10 --dry-run   # preview
@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const POLICY_PATH = path.join(ROOT, '.quality/ratchet-policy.json');
-const WORKFLOW_PATH = path.join(ROOT, '.github/workflows/quality.yml');
+const WORKFLOW_PATH = path.join(ROOT, '.github/workflows/ci.yml');
 const README_PATH = path.join(ROOT, 'README.md');
 
 function parseArgs() {
@@ -84,7 +84,7 @@ function main() {
 		console.log(`  ratchet-policy.json: defaultPhase ${currentPhase} → ${phase}`);
 	}
 	if (workflowNeedsUpdate) {
-		console.log(`  quality.yml: QUALITY_PHASE → ${phase}`);
+		console.log(`  ci.yml: QUALITY_PHASE → ${phase}`);
 	}
 
 	// Generate README updates
@@ -131,7 +131,7 @@ function main() {
 	if (workflowNeedsUpdate) {
 		const updated = workflow.replace(/QUALITY_PHASE:\s*\w+/g, `QUALITY_PHASE: ${phase}`);
 		fs.writeFileSync(WORKFLOW_PATH, updated);
-		console.log('  ✓ Updated quality.yml');
+		console.log('  ✓ Updated ci.yml');
 	}
 
 	if (readmeChanged) {
