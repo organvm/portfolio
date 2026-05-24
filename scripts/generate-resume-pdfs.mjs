@@ -58,7 +58,7 @@ async function generatePDFs() {
 		const url = `${BASE_URL}/for/${target.slug}/`;
 		const outputPath = path.join(
 			OUTPUT_DIR,
-			`Anthony_James_Padavano_App_${target.company.replace(/\\s+/g, '_')}.pdf`,
+			`Anthony_James_Padavano_App_${target.company.replace(/\s+/g, '_')}.pdf`,
 		);
 		generationTasks.push(generateSinglePDF(url, outputPath, `Target: ${target.company}`));
 	}
