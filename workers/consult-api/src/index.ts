@@ -291,7 +291,11 @@ export default {
 		}
 
 		if (request.method !== 'POST' || url.pathname !== '/api/consult') {
-			return jsonResponse({ ok: false, code: 'NOT_FOUND', message: 'Not found.' }, 404, corsHeaders);
+			return jsonResponse(
+				{ ok: false, code: 'NOT_FOUND', message: 'Not found.' },
+				404,
+				corsHeaders,
+			);
 		}
 
 		const requestId = crypto.randomUUID();
