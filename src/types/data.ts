@@ -32,15 +32,21 @@ export interface PraxisTarget {
 
 export interface SystemMetrics {
 	generated: string;
-	sprint: string;
-	system: { name: string; launch_date: string; project_status: string };
+	// Newer generate-data schema (schema_version >= current) splits values into
+	// computed/manual blocks. Older flat fields below are optional because the
+	// current generator no longer emits them; dashboard consumers guard for absence.
+	schema_version?: number;
+	computed?: Record<string, unknown>;
+	manual?: Record<string, unknown>;
+	sprint?: string;
+	system?: { name: string; launch_date: string; project_status: string };
 	registry: {
 		total_repos: number;
 		total_organs: number;
 		operational_organs: number;
 		implementation_status: Record<string, number>;
-		tier_distribution: Record<string, number>;
-		promotion_status: Record<string, number>;
+		tier_distribution?: Record<string, number>;
+		promotion_status?: Record<string, number>;
 		ci_coverage: number;
 		dependency_edges: number;
 		organs: Record<string, Organ>;
@@ -55,7 +61,7 @@ export interface SystemMetrics {
 		classifications: Record<string, number>;
 		repos: FlagshipRepo[];
 	};
-	sprint_history: Sprint[];
+	sprint_history?: Sprint[];
 	praxis_targets?: Record<string, PraxisTarget>;
 	essays: { total: number };
 }
