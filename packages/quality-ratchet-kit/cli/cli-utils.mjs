@@ -14,7 +14,7 @@ const args = process.argv.slice(2);
  */
 export function parseOption(name, fallback = null) {
 	const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-	if (eq) return eq.split('=')[1] ?? fallback;
+	if (eq) return eq.slice(eq.indexOf('=') + 1);
 	const index = args.indexOf(`--${name}`);
 	if (index >= 0) return args[index + 1] ?? fallback;
 	return fallback;

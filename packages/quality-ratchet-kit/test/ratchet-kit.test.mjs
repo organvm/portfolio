@@ -93,4 +93,14 @@ describe('threshold-checker', () => {
 		assert.equal(result.pass, false);
 		assert.equal(result.failures.length, 4);
 	});
+
+	it('fails when a required metric is missing', () => {
+		const result = checkThresholds(
+			{ statements: 30, branches: 20, lines: 30 },
+			{ statements: 25, branches: 18, functions: 18, lines: 25 },
+		);
+		assert.equal(result.pass, false);
+		assert.equal(result.failures.length, 1);
+		assert.equal(result.failures[0].metric, 'functions');
+	});
 });

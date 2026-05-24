@@ -82,7 +82,7 @@
 		"quality:parallel:pre": "run-p lint typecheck:strict test:security:prod test:security check:freshness",
 		"quality:parallel:post": "run-p test validate test:a11y",
 		"quality:fast": "npm run quality:parallel:pre && npm run build && npm run quality:parallel:post",
-		"preflight": "npm run lint && npm run typecheck && npm run build && npm run validate && npm run sync:a11y-routes && npm run check:runtime-route-manifest && npm run test",
+		"preflight": "npm run lint && npm run typecheck:strict && npm run build && npm run validate && npm run sync:a11y-routes && npm run check:runtime-route-manifest && npm run test",
 		"test:ci": "npm run quality:local"
 	},
 	"dependencies": {

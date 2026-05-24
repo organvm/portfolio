@@ -10,7 +10,7 @@ const OUTPUT_PATH = resolve('.quality/delta-summary.json');
 
 function parseOption(argv, name) {
 	const eqArg = argv.find((entry) => entry.startsWith(`--${name}=`));
-	if (eqArg) return eqArg.split('=')[1] ?? null;
+	if (eqArg) return eqArg.slice(eqArg.indexOf('=') + 1);
 	const index = argv.indexOf(`--${name}`);
 	if (index >= 0) return argv[index + 1] ?? null;
 	return null;
