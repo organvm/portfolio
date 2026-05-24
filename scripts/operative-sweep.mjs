@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -62,8 +62,9 @@ ${content}
 
 		try {
 			console.log(`🧠 AI extracting metadata and matching persona...`);
-			const output = execSync(`gemini -p ${JSON.stringify(prompt)} 2>/dev/null`, {
+			const output = execFileSync('gemini', ['-p', prompt], {
 				encoding: 'utf8',
+				stdio: ['ignore', 'pipe', 'ignore'],
 			});
 			const parsed = parseTargetJson(output);
 
@@ -73,9 +74,14 @@ ${content}
 
 			console.log(`🚀 Executing Strike Protocol...`);
 			// Execute the strike command synchronously
-			execSync(`npm run strike:new "${parsed.company}" "${parsed.role}" "${parsed.persona_id}"`, {
-				stdio: 'inherit',
-			});
+			const strikeResult = spawnSync(
+				'npm',
+				['run', 'strike:new', '--', parsed.company, parsed.role, parsed.persona_id],
+				{ stdio: 'inherit' },
+			);
+			if (strikeResult.status !== 0) {
+				throw new Error(`strike:new exited with status ${strikeResult.status}`);
+			}
 
 			// Move file to processed
 			fs.renameSync(filePath, path.join(PROCESSED_DIR, file));

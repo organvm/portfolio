@@ -6,7 +6,7 @@
  * Searches for roles matching core personas and generates draft intelligence.
  */
 
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,7 +33,10 @@ async function scout() {
 		const searchPrompt = `List 3 companies and specific open roles (e.g. "Senior AI Engineer at OpenAI") that would be a perfect fit for a "${persona.title}" with a focus on "${persona.thesis}". Provide only the company name, role, and a one-sentence justification. Format as JSON: [{"company": "...", "role": "...", "reason": "..."}]`;
 
 		try {
-			const output = execSync(`gemini -p '${searchPrompt}' 2>/dev/null`, { encoding: 'utf8' });
+			const output = execFileSync('gemini', ['-p', searchPrompt], {
+				encoding: 'utf8',
+				stdio: ['ignore', 'pipe', 'ignore'],
+			});
 			const jsonMatch = output.match(/\[.*\]/s);
 			if (jsonMatch) {
 				const found = JSON.parse(jsonMatch[0]);

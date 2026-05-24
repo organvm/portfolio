@@ -30,6 +30,9 @@ async function getFontData() {
 		const res = await fetch(
 			'https://fonts.gstatic.com/s/syne/v24/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6k.ttf',
 		);
+		if (!res.ok) {
+			throw new Error(`Failed to fetch Syne font: ${res.status} ${res.statusText}`);
+		}
 		fontDataCache = await res.arrayBuffer();
 	}
 	return fontDataCache;
