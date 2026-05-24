@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,10 +13,13 @@ function generateAIIntro(company, role, persona) {
 	const prompt = `Write a professional 2-sentence introduction for an application to ${company} for the role of ${role}. Write in the first person. Frame my background around the '${persona}' persona, emphasizing system architecture, generative AI, and logical integrity. Do not include greetings or sign-offs, just the two sentences.`;
 
 	try {
-		const output = execSync(`gemini -p "${prompt}" 2>/dev/null`, { encoding: 'utf8' });
+		const output = execFileSync('gemini', ['-p', prompt], {
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		});
 		const lines = output
-			.replace(/\\u001b\\[[0-9;]*m/g, '')
-			.split('\\n')
+			.replace(/\u001b\[[0-9;]*m/g, '')
+			.split('\n')
 			.map((l) => l.trim())
 			.filter((l) => l.length > 0);
 		const cleanOutput = lines
@@ -45,10 +48,13 @@ function generateAIProposal(company, role, persona) {
 	const prompt = `Write a compelling 3-paragraph executive proposal for an application to ${company} for the role of ${role}. Frame my background around the '${persona}' persona. The proposal must be highly opinionated, focusing on systemic architecture, logocentric design, and quality assurance. Do not use generic corporate jargon. Be direct and authoritative. Do not include a greeting or signature. Output the response in raw HTML format using only <p>, <strong>, and <ul>/<li> tags. Do not use markdown backticks.`;
 
 	try {
-		const output = execSync(`gemini -p "${prompt}" 2>/dev/null`, { encoding: 'utf8' });
+		const output = execFileSync('gemini', ['-p', prompt], {
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		});
 		const lines = output
-			.replace(/\\u001b\\[[0-9;]*m/g, '')
-			.split('\\n')
+			.replace(/\u001b\[[0-9;]*m/g, '')
+			.split('\n')
 			.filter((l) => l.trim().length > 0);
 		const cleanOutput = lines
 			.filter(
@@ -59,7 +65,7 @@ function generateAIProposal(company, role, persona) {
 					!l.startsWith('Loaded ') &&
 					!l.includes('tool update notification'),
 			)
-			.join('\\n')
+			.join('\n')
 			.trim();
 		return cleanOutput || `<p>[DRAFT PROPOSAL] Detailed architectural proposal goes here.</p>`;
 	} catch (error) {
@@ -86,7 +92,7 @@ async function createStrike() {
 	const data = JSON.parse(fs.readFileSync(TARGETS_PATH, 'utf8'));
 
 	if (data.targets.some((t) => t.slug === slug)) {
-		console.error(`\\n❌ Error: Target '${slug}' already exists in the intelligence ledger.`);
+		console.error(`\n❌ Error: Target '${slug}' already exists in the intelligence ledger.`);
 		process.exit(1);
 	}
 

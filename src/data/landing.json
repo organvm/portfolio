@@ -2,8 +2,8 @@
   "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 147,
-    "active_repos": 91,
+    "total_repos": 148,
+    "active_repos": 92,
     "archived_repos": 54,
     "dependency_edges": 62,
     "ci_workflows": 107,
@@ -88,7 +88,7 @@
       "name": "Personal / Liminal",
       "greek": "PERSONAL",
       "org": "",
-      "repo_count": 3,
+      "repo_count": 4,
       "status": "OPERATIONAL",
       "description": "Personal infrastructure outside the eight-organ system. Operator environment, agent configuration, secrets management."
     },
@@ -103,5 +103,5 @@
     }
   ],
   "sprint_history": [],
-  "generated": "2026-04-25T07:50:39.824570+00:00"
+  "generated": "2026-05-24T09:04:30.707019+00:00"
 }

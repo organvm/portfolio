@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-04-25T07:09:34.198143+00:00",
+  "generated": "2026-05-24T08:24:49.463520+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -66,11 +66,11 @@
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 147,
+    "total_repos": 148,
     "total_organs": 10,
     "operational_organs": 10,
     "implementation_status": {
-      "ACTIVE": 91,
+      "ACTIVE": 92,
       "ARCHIVED": 54,
       "PROTOTYPE": 2
     },
@@ -115,7 +115,7 @@
       },
       "PERSONAL": {
         "name": "Personal / Liminal",
-        "total_repos": 3
+        "total_repos": 4
       }
     }
   },

@@ -18,6 +18,7 @@ vi.mock('@resvg/resvg-js', () => ({
 
 // Mock fetch for the font download
 const mockFetch = vi.fn(async () => ({
+	ok: true,
 	arrayBuffer: async () => new ArrayBuffer(8),
 }));
 vi.stubGlobal('fetch', mockFetch);
