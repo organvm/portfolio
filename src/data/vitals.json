@@ -12,15 +12,8 @@
     "ci_coverage_pct": 72
   },
   "logos": {
-    "essays": 0,
-    "words": 6200,
-    "word_breakdown": {
-      "readmes": 6200,
-      "essays": 0,
-      "corpus": 0,
-      "org_profiles": 0,
-      "total": 6200
-    }
+    "essays": 29,
+    "words": 300000
   },
-  "timestamp": "2026-05-23T08:34:09.785737+00:00"
+  "timestamp": "2026-05-24T09:04:30.706745+00:00"
 }
