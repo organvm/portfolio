@@ -74,7 +74,9 @@ import DepthControl from '../shibui/DepthControl.astro';
 </style>
 
 <script>
-function initBentoViewToggle() {
+let bentoController: AbortController | null = null;
+
+function initBentoViewToggle(signal: AbortSignal) {
 	const btns = document.querySelectorAll<HTMLButtonElement>('[data-bento-view]');
 	if (!btns.length) return;
 
@@ -115,9 +117,13 @@ function initBentoViewToggle() {
 				b.classList.toggle('view-toggle__btn--active', filterView === view);
 				b.setAttribute('aria-pressed', String(filterView === view));
 			});
-		});
+		}, { signal });
 	});
 }
 
-document.addEventListener('astro:page-load', initBentoViewToggle);
+document.addEventListener('astro:page-load', () => {
+	bentoController?.abort();
+	bentoController = new AbortController();
+	initBentoViewToggle(bentoController.signal);
+});
 </script>

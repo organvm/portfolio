@@ -38,7 +38,9 @@ const { trace } = sample;
 </div>
 
 <script>
-  function setupGovPreview() {
+  let govController: AbortController | null = null;
+
+  function setupGovPreview(signal: AbortSignal) {
     const preview = document.getElementById('gov-preview');
     const closeBtn = document.getElementById('close-gov-preview') as HTMLButtonElement;
     const trigger = document.getElementById('view-trace-btn');
@@ -58,8 +60,8 @@ const { trace } = sample;
       (trigger as HTMLElement).focus();
     }
 
-    trigger.addEventListener('click', openPreview);
-    closeBtn.addEventListener('click', closePreview);
+    trigger.addEventListener('click', openPreview, { signal });
+    closeBtn.addEventListener('click', closePreview, { signal });
 
     // Trap focus and handle keyboard
     preview.addEventListener('keydown', (e) => {
@@ -69,14 +71,24 @@ const { trace } = sample;
         e.preventDefault();
         closeBtn.focus(); // Only one focusable element in this simple modal, so we loop back to it
       }
-    });
+    }, { signal });
 
     preview.addEventListener('click', (e) => {
       if (e.target === preview) closePreview();
-    });
+    }, { signal });
   }
 
-  document.addEventListener('astro:page-load', setupGovPreview);
+  document.addEventListener('astro:page-load', () => {
+    govController?.abort();
+    govController = new AbortController();
+    setupGovPreview(govController.signal);
+  });
+  document.addEventListener('astro:before-swap', () => {
+    govController?.abort();
+    govController = null;
+    // Reset the scroll-lock in case we navigate away while the modal is open.
+    document.body.style.overflow = '';
+  });
 </script>
 
 <style>
