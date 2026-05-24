@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ABOUT_PATH = path.join(__dirname, '../src/data/about.json');
@@ -40,7 +41,7 @@ function syncIdentity() {
 	about.system_summary = summary;
 	about.generated = new Date().toISOString();
 
-	fs.writeFileSync(ABOUT_PATH, JSON.stringify(about, null, '\t'), 'utf8');
+	writeJsonAtomic(ABOUT_PATH, about, { indent: '\t', trailingNewline: false });
 	console.log(`🚀 Identity synchronized: ${totalRepos} repos, ${ciWorkflows} CI workflows.`);
 }
 

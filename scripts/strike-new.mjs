@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateOGImage } from './generate-og-images.mjs';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TARGETS_PATH = path.join(__dirname, '../src/data/targets.json');
@@ -113,7 +114,7 @@ async function createStrike() {
 
 	data.targets.unshift(newTarget);
 
-	fs.writeFileSync(TARGETS_PATH, JSON.stringify(data, null, 2) + '\n');
+	writeJsonAtomic(TARGETS_PATH, data);
 
 	// Generate bespoke OG image
 	console.log(`🎨 Generating bespoke social card for ${company}...`);

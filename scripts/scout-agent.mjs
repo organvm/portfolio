@@ -10,6 +10,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CANDIDATES_PATH = path.join(__dirname, '../src/data/scout-candidates.json');
@@ -61,7 +62,7 @@ async function scout() {
 	}
 
 	candidates.last_scout = new Date().toISOString();
-	fs.writeFileSync(CANDIDATES_PATH, JSON.stringify(candidates, null, 2));
+	writeJsonAtomic(CANDIDATES_PATH, candidates, { trailingNewline: false });
 	console.log(`
 ✅ Scouting complete. ${candidates.candidates.filter((c) => c.status === 'triage').length} candidates in triage.`);
 }

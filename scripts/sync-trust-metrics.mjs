@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const QUALITY_DIR = path.join(__dirname, '../.quality');
@@ -89,7 +90,7 @@ async function syncVitals() {
 		console.warn('⚠️ Could not parse github-pages-telemetry.json');
 	}
 
-	fs.writeFileSync(TRUST_VITALS_PATH, JSON.stringify(trustVitals, null, 2));
+	writeJsonAtomic(TRUST_VITALS_PATH, trustVitals, { trailingNewline: false });
 	console.log(`✅ Trust Vitals synced to ${TRUST_VITALS_PATH}`);
 
 	// 4. Derive vitals.json from system-metrics.json
@@ -126,7 +127,7 @@ async function syncVitals() {
 			timestamp: metrics.generated,
 		};
 
-		fs.writeFileSync(VITALS_PATH, JSON.stringify(vitals, null, 2));
+		writeJsonAtomic(VITALS_PATH, vitals, { trailingNewline: false });
 		console.log(`✅ Derived Vitals synced to ${VITALS_PATH}`);
 
 		// 5. Update landing.json metrics from system-metrics.json
@@ -143,7 +144,7 @@ async function syncVitals() {
 				sprints_completed: metrics.sprints?.completed ?? 0,
 			};
 			landing.generated = metrics.generated;
-			fs.writeFileSync(LANDING_PATH, JSON.stringify(landing, null, 2));
+			writeJsonAtomic(LANDING_PATH, landing, { trailingNewline: false });
 			console.log(`✅ Landing Metrics synced to ${LANDING_PATH}`);
 		}
 	} catch (e) {

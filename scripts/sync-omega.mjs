@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OMEGA_PATH = path.join(__dirname, '../src/data/omega.json');
@@ -45,7 +46,7 @@ async function syncOmega() {
 
 	omega.generated = new Date().toISOString().split('T')[0];
 
-	fs.writeFileSync(OMEGA_PATH, JSON.stringify(omega, null, 2) + '\n');
+	writeJsonAtomic(OMEGA_PATH, omega);
 	console.log(
 		`✅ Omega Scorecard synchronized. Horizon 2 (Criterion 5) linked to ${targetCount} active strike targets.`,
 	);

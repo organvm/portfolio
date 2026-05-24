@@ -12,8 +12,9 @@
  * Requires: GH_TOKEN or GITHUB_TOKEN environment variable for API access.
  */
 
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const DEFAULT_OUTPUT = resolve('src/data/workspace-health.json');
 const args = process.argv.slice(2);
@@ -91,7 +92,7 @@ async function main() {
 	};
 
 	mkdirSync(dirname(outputPath), { recursive: true });
-	writeFileSync(outputPath, JSON.stringify(output, null, 2) + '\n');
+	writeJsonAtomic(outputPath, output);
 	console.log(`Wrote workspace health to ${outputPath}`);
 }
 

@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeJsonAtomic } from './lib/atomic-write.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -123,7 +124,7 @@ async function generateA11yRoutes() {
 		routes,
 	};
 
-	fs.writeFileSync(OUTPUT_PATH, JSON.stringify(manifest, null, 2) + '\n');
+	writeJsonAtomic(OUTPUT_PATH, manifest);
 	console.log(`✅ Successfully generated ${routes.length} routes for A11y runtime audit.`);
 }
 
