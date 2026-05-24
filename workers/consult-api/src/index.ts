@@ -25,7 +25,7 @@ interface ConsultSuccessResponse {
 
 interface ConsultErrorResponse {
 	ok: false;
-	code: 'BAD_INPUT' | 'AI_TIMEOUT' | 'AI_ERROR' | 'INTERNAL';
+	code: 'BAD_INPUT' | 'AI_TIMEOUT' | 'AI_ERROR' | 'INTERNAL' | 'RATE_LIMITED' | 'NOT_FOUND';
 	message: string;
 	requestId: string;
 }
@@ -68,6 +68,9 @@ interface FallbackOrgan {
 const MODEL = '@cf/meta/llama-3.1-8b-instruct';
 const AI_TIMEOUT_MS = 8000;
 const MAX_CHALLENGE_LENGTH = 4000;
+const MAX_BODY_BYTES = 16 * 1024;
+const RATE_LIMIT_MAX = 12;
+const RATE_LIMIT_WINDOW_MS = 60_000;
 const DEFAULT_KNOWLEDGE_API_URL = 'https://stakeholder-portal-ten.vercel.app/api/knowledge';
 const DEFAULT_ALLOWED_ORIGINS = [
 	'https://4444j99.github.io',
@@ -288,7 +291,7 @@ export default {
 		}
 
 		if (request.method !== 'POST' || url.pathname !== '/api/consult') {
-			return jsonResponse({ ok: false, code: 'INTERNAL', message: 'Not found.' }, 404, corsHeaders);
+			return jsonResponse({ ok: false, code: 'NOT_FOUND', message: 'Not found.' }, 404, corsHeaders);
 		}
 
 		const requestId = crypto.randomUUID();
@@ -296,13 +299,47 @@ export default {
 		const userAgent = request.headers.get('user-agent') || '';
 		const clientIp = request.headers.get('CF-Connecting-IP') || '';
 
+		const contentLength = Number(request.headers.get('content-length') || '0');
+		if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
+			return jsonResponse(
+				{ ok: false, code: 'BAD_INPUT', message: 'Request body too large.', requestId },
+				413,
+				corsHeaders,
+			);
+		}
+
+		if (await isRateLimited(env, clientIp)) {
+			return jsonResponse(
+				{
+					ok: false,
+					code: 'RATE_LIMITED',
+					message: 'Too many requests. Please retry in a minute.',
+					requestId,
+				},
+				429,
+				corsHeaders,
+			);
+		}
+
+		let body: ConsultRequestBody;
 		try {
-			const body = (await request.json()) as ConsultRequestBody;
+			body = (await request.json()) as ConsultRequestBody;
+		} catch {
+			return jsonResponse(
+				{ ok: false, code: 'BAD_INPUT', message: 'Invalid JSON body.', requestId },
+				400,
+				corsHeaders,
+			);
+		}
+
+		try {
 			const challenge = typeof body.challenge === 'string' ? body.challenge.trim() : '';
 			const industry = normalizeIndustry(body.industry);
 			const page = typeof body.page === 'string' ? body.page.slice(0, 512) : '';
 			const incomingRequestId = typeof body.requestId === 'string' ? body.requestId.trim() : '';
-			const effectiveRequestId = incomingRequestId || requestId;
+			const effectiveRequestId = /^[A-Za-z0-9_-]{1,64}$/.test(incomingRequestId)
+				? incomingRequestId
+				: requestId;
 
 			if (challenge.length < 20 || challenge.length > MAX_CHALLENGE_LENGTH) {
 				const errorBody: ConsultErrorResponse = {
@@ -665,6 +702,37 @@ async function hashIp(ip: string, salt: string): Promise<string | null> {
 	return bytes.map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
+const FALLBACK_LOG_SALT = crypto.randomUUID();
+let warnedNoSalt = false;
+function getLogSalt(env: Env): string {
+	if (env.LOG_HASH_SALT) return env.LOG_HASH_SALT;
+	if (!warnedNoSalt) {
+		warnedNoSalt = true;
+		console.warn(
+			'LOG_HASH_SALT not set; using an ephemeral per-instance salt (IP hashes will not correlate across instances).',
+		);
+	}
+	return FALLBACK_LOG_SALT;
+}
+
+async function isRateLimited(env: Env, ip: string): Promise<boolean> {
+	if (!env.CONSULT_DB || !ip) return false;
+	try {
+		const ipHash = await hashIp(ip, getLogSalt(env));
+		if (!ipHash) return false;
+		const since = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
+		const row = await env.CONSULT_DB.prepare(
+			'SELECT COUNT(*) AS n FROM consult_logs WHERE ip_hash = ?1 AND created_at > ?2',
+		)
+			.bind(ipHash, since)
+			.first<{ n: number }>();
+		return (row?.n ?? 0) >= RATE_LIMIT_MAX;
+	} catch (error) {
+		console.error('rate limit check failed', error);
+		return false;
+	}
+}
+
 async function logConsult(
 	env: Env,
 	payload: {
@@ -684,7 +752,7 @@ async function logConsult(
 ): Promise<void> {
 	if (!env.CONSULT_DB) return;
 	try {
-		const ipHash = await hashIp(payload.ip, env.LOG_HASH_SALT || 'portfolio-consult');
+		const ipHash = await hashIp(payload.ip, getLogSalt(env));
 		await env.CONSULT_DB.prepare(`
         INSERT INTO consult_logs (
           id,
