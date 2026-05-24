@@ -57,10 +57,23 @@ const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 let prefersReducedMotion = motionQuery.matches;
 motionQuery.addEventListener('change', (e) => {
 	prefersReducedMotion = e.matches;
+	// Re-apply to already-running instances — the persistent #bg-canvas survives
+	// navigations and would otherwise keep animating after reduced-motion is enabled.
+	for (const inst of instances.values()) {
+		if (!inst.draw) continue;
+		if (prefersReducedMotion) {
+			inst.noLoop();
+		} else {
+			inst.loop();
+		}
+	}
 });
 
 // Defer background sketch boot on the heaviest interactive routes.
-const BACKGROUND_DEFER_ROUTES = new Set(['/portfolio/architecture', '/portfolio/gallery']);
+const BACKGROUND_DEFER_ROUTES = new Set([
+	`${import.meta.env.BASE_URL}architecture`,
+	`${import.meta.env.BASE_URL}gallery`,
+]);
 
 // Track p5 instances for teardown (Map replaces former Set for VT readiness)
 const instances = new Map<HTMLElement, p5>();

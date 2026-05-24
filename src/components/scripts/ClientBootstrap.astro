@@ -20,7 +20,7 @@
   if (!bootstrapState.listenersAttached) {
     // Service worker registration — runs once on initial load
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/portfolio/sw.js').catch(() => {});
+      navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {});
     }
 
     // Focus management for View Transitions — move focus to main content
