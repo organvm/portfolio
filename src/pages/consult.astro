@@ -56,6 +56,11 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
 
+        <div class="book-cta" data-reveal>
+          <button type="button" id="book-consult-btn" class="book-cta__btn">Book a consult &rarr;</button>
+          <p id="book-consult-status" class="book-cta__status" role="status" aria-live="polite"></p>
+        </div>
+
         <h2 class="ai-advisor-heading">AI Capability Advisor</h2>
         <p class="consult-intro">
           Not sure which service fits? Describe your challenge below and our AI advisor will map your needs to specific capabilities.
@@ -153,6 +158,9 @@ import Layout from '../layouts/Layout.astro';
   const CONSULT_API_BASE = (import.meta.env.PUBLIC_CONSULT_API_BASE ?? '').trim();
   const CONSULT_API_URL = CONSULT_API_BASE
     ? `${CONSULT_API_BASE.replace(/\/+$/, '')}/api/consult`
+    : null;
+  const CHECKOUT_API_URL = CONSULT_API_BASE
+    ? `${CONSULT_API_BASE.replace(/\/+$/, '')}/api/checkout`
     : null;
 
   async function callConsultApi(challenge: string, industry: string, requestId: string): Promise<RenderAnalysis> {
@@ -292,7 +300,41 @@ import Layout from '../layouts/Layout.astro';
     });
   }
 
+  function initBookCta() {
+    const btn = document.getElementById('book-consult-btn') as HTMLButtonElement | null;
+    if (!btn || btn.dataset.initialized === 'true') return;
+    btn.dataset.initialized = 'true';
+    const status = document.getElementById('book-consult-status');
+    if (!CHECKOUT_API_URL) {
+      btn.hidden = true;
+      return;
+    }
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      if (status) status.textContent = 'Opening secure checkout…';
+      try {
+        const res = await fetch(CHECKOUT_API_URL, { method: 'POST' });
+        const data = (await res.json().catch(() => null)) as { url?: string } | null;
+        if (res.ok && data?.url) {
+          window.location.href = data.url;
+          return;
+        }
+        if (status) {
+          status.textContent =
+            res.status === 503
+              ? "Online booking isn't set up yet — use the AI advisor below or reach out directly."
+              : 'Could not start checkout right now. Please try again later.';
+        }
+      } catch {
+        if (status) status.textContent = 'Could not reach checkout. Please try again later.';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
   document.addEventListener('astro:page-load', initConsultForm);
+  document.addEventListener('astro:page-load', initBookCta);
 </script>
 
 <style>
@@ -617,5 +659,42 @@ import Layout from '../layouts/Layout.astro';
     .btn-submit {
       align-self: stretch;
     }
+  }
+  .book-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: var(--space-2xl) 0;
+    text-align: center;
+  }
+  .book-cta__btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg-primary);
+    border: none;
+    padding: var(--space-sm) var(--space-2xl);
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      transform var(--transition-fast),
+      background var(--transition-fast);
+  }
+  .book-cta__btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: var(--accent-hover);
+  }
+  .book-cta__btn:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+  .book-cta__status {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    min-height: 1.2em;
   }
 </style>

@@ -7,6 +7,7 @@ interface Env {
 	// Commerce (Stripe) — checkout is inert until both are set as secrets.
 	STRIPE_SECRET_KEY?: string;
 	STRIPE_PRICE_ID?: string;
+	STRIPE_WEBHOOK_SECRET?: string;
 	SITE_URL?: string;
 }
 
@@ -322,6 +323,74 @@ async function handleCheckout(request: Request, env: Env, corsHeaders: Headers):
 	}
 }
 
+async function verifyStripeSignature(
+	payload: string,
+	sigHeader: string,
+	secret: string,
+): Promise<boolean> {
+	// Stripe-Signature header: "t=<ts>,v1=<hex hmac>[,v1=...]"
+	const parts: Record<string, string> = {};
+	for (const seg of sigHeader.split(',')) {
+		const idx = seg.indexOf('=');
+		if (idx > 0) parts[seg.slice(0, idx)] = seg.slice(idx + 1);
+	}
+	const t = parts.t;
+	const v1 = parts.v1;
+	if (!t || !v1) return false;
+	const key = await crypto.subtle.importKey(
+		'raw',
+		new TextEncoder().encode(secret),
+		{ name: 'HMAC', hash: 'SHA-256' },
+		false,
+		['sign'],
+	);
+	const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${t}.${payload}`));
+	const expected = [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, '0')).join('');
+	// Constant-time comparison.
+	if (expected.length !== v1.length) return false;
+	let diff = 0;
+	for (let i = 0; i < expected.length; i++) diff |= expected.charCodeAt(i) ^ v1.charCodeAt(i);
+	return diff === 0;
+}
+
+async function handleStripeWebhook(
+	request: Request,
+	env: Env,
+	corsHeaders: Headers,
+): Promise<Response> {
+	if (!env.STRIPE_WEBHOOK_SECRET) {
+		return jsonResponse(
+			{ ok: false, code: 'NOT_CONFIGURED', message: 'Webhook is not configured.' },
+			503,
+			corsHeaders,
+		);
+	}
+	const sig = request.headers.get('Stripe-Signature');
+	const payload = await request.text();
+	if (!sig || !(await verifyStripeSignature(payload, sig, env.STRIPE_WEBHOOK_SECRET))) {
+		return jsonResponse(
+			{ ok: false, code: 'BAD_SIGNATURE', message: 'Invalid signature.' },
+			400,
+			corsHeaders,
+		);
+	}
+	try {
+		const event = JSON.parse(payload) as { type?: string; data?: { object?: { id?: string } } };
+		if (event.type === 'checkout.session.completed') {
+			// Fulfillment hook: the session completed. Persisting to D1 or
+			// notifying would go here; for now we acknowledge receipt.
+			console.log('Stripe checkout.session.completed:', event.data?.object?.id ?? 'unknown');
+		}
+		return jsonResponse({ ok: true, received: true }, 200, corsHeaders);
+	} catch {
+		return jsonResponse(
+			{ ok: false, code: 'BAD_INPUT', message: 'Invalid webhook payload.' },
+			400,
+			corsHeaders,
+		);
+	}
+}
+
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const origin = request.headers.get('Origin');
@@ -338,6 +407,10 @@ export default {
 
 		if (request.method === 'POST' && url.pathname === '/api/checkout') {
 			return handleCheckout(request, env, corsHeaders);
+		}
+
+		if (request.method === 'POST' && url.pathname === '/api/stripe-webhook') {
+			return handleStripeWebhook(request, env, corsHeaders);
 		}
 
 		if (request.method !== 'POST' || url.pathname !== '/api/consult') {
