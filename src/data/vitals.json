@@ -15,7 +15,7 @@
     "essays": 29,
     "words": 300000
   },
-  "timestamp": "2026-05-31T09:28:06.589592+00:00",
+  "timestamp": "2026-06-01T12:15:28.563046+00:00",
   "organism": {
     "density": 0.253,
     "entities": 148,
@@ -27,10 +27,10 @@
     "total": 20
   },
   "promotion_pipeline": {
-    "ARCHIVED": 54,
+    "ARCHIVED": 53,
     "CANDIDATE": 1,
     "GRADUATED": 59,
     "LOCAL": 27,
-    "PUBLIC_PROCESS": 7
+    "PUBLIC_PROCESS": 8
   }
 }
