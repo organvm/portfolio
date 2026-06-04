@@ -1,19 +1,47 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
 import satori from 'satori';
 
 // Satori requires raw TTF/OTF — woff2 is not supported.
-// Fetch Syne from Google Fonts at build time (cached across pages).
+// Prefer local fonts so static builds do not depend on network availability.
 let fontDataCache: ArrayBuffer | null = null;
 
-async function getFontData(): Promise<ArrayBuffer> {
-	if (fontDataCache) return fontDataCache;
+const LOCAL_FONT_PATHS = [
+	'public/fonts/syne-latin.ttf',
+	'/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
+	'/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf',
+];
+
+function bufferToArrayBuffer(buffer: Buffer): ArrayBuffer {
+	return buffer.buffer.slice(
+		buffer.byteOffset,
+		buffer.byteOffset + buffer.byteLength,
+	) as ArrayBuffer;
+}
+
+async function fetchFontData(): Promise<ArrayBuffer> {
 	const res = await fetch(
 		'https://fonts.gstatic.com/s/syne/v24/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6k.ttf',
 	);
 	if (!res.ok) {
 		throw new Error(`Failed to fetch Syne font for OG image: ${res.status} ${res.statusText}`);
 	}
-	fontDataCache = await res.arrayBuffer();
+	return res.arrayBuffer();
+}
+
+async function getFontData(): Promise<ArrayBuffer> {
+	if (fontDataCache) return fontDataCache;
+
+	for (const path of LOCAL_FONT_PATHS) {
+		const fontPath = path.startsWith('/') ? path : resolve(process.cwd(), path);
+		if (existsSync(fontPath)) {
+			fontDataCache = bufferToArrayBuffer(readFileSync(fontPath));
+			return fontDataCache;
+		}
+	}
+
+	fontDataCache = await fetchFontData();
 	return fontDataCache;
 }
 

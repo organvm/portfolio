@@ -280,6 +280,14 @@ html[data-shibui-depth="overview"] .shibui-entry + p[data-shibui-c] {
 	display: none;
 }
 
+/* Auto-annotated term tooltip (uses data-definition attribute) */
+.shibui-term[data-definition] {
+	position: relative;
+	cursor: help;
+	border-bottom: 1px dotted var(--accent);
+	transition: border-color var(--transition-fast);
+}
+
 /* Standard: show all paragraphs, auto-terms prominently annotated */
 html[data-shibui-depth="standard"] .shibui-entry {
 	display: none;
@@ -297,14 +305,6 @@ html[data-shibui-depth="full"] .shibui-entry {
 
 html[data-shibui-depth="full"] [data-shibui-c] .shibui-term[data-definition] {
 	border-bottom: 1px dotted color-mix(in srgb, var(--accent) 40%, transparent);
-}
-
-/* Auto-annotated term tooltip (uses data-definition attribute) */
-.shibui-term[data-definition] {
-	position: relative;
-	cursor: help;
-	border-bottom: 1px dotted var(--accent);
-	transition: border-color var(--transition-fast);
 }
 
 .shibui-term[data-definition] .shibui-term__definition {

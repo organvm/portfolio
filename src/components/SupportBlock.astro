@@ -4,8 +4,6 @@
 //   PUBLIC_SPONSORS_URL         — GitHub Sponsors page (recurring / MRR)
 //   PUBLIC_SUPPORT_PAYMENT_URL  — Stripe Payment Link (one-time / revenue_status)
 
-export type Props = {};
-
 const sponsorsUrl = import.meta.env.PUBLIC_SPONSORS_URL?.trim();
 const supportPaymentUrl = import.meta.env.PUBLIC_SUPPORT_PAYMENT_URL?.trim();
 const hasAny = Boolean(sponsorsUrl || supportPaymentUrl);
