@@ -14,6 +14,12 @@ const DIST = resolve('dist');
 const SITE_BASE = 'https://4444j99.github.io/portfolio/';
 let exitCode = 0;
 
+if (!existsSync(DIST)) {
+	console.error(`✗ Build output directory not found: ${DIST}`);
+	console.error('Run `npm run build` before `npm run validate`.');
+	process.exit(1);
+}
+
 // --- HTML Validation ---
 console.log('=== HTML Validation ===\n');
 const htmlValidateResult = spawnSync(

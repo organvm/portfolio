@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { describe, expect, it } from 'vitest';
 
 const DIST = resolve(process.cwd(), 'dist');
+const describeBuiltOutput = existsSync(DIST) ? describe : describe.skip;
 const FEED = resolve(DIST, 'feed.xml');
 const SITE_BASE = 'https://4444j99.github.io/portfolio/';
 
@@ -16,7 +17,7 @@ function variants(relativePath: string): string[] {
 	];
 }
 
-describe('feed output', () => {
+describeBuiltOutput('feed output', () => {
 	it('feed.xml exists in dist', () => {
 		expect(existsSync(FEED)).toBe(true);
 	});
