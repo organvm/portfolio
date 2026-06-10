@@ -137,6 +137,17 @@ If `PUBLIC_CONSULT_API_BASE` is not set, the consult page still works using dete
 - [Security Policy](.github/SECURITY.md)
 - [Support](.github/SUPPORT.md)
 
+---
+
+## 💰 Support & Funding
+
+Enjoying the work? Support development through:
+
+- **[GitHub Sponsors](https://github.com/sponsors/4444J99)** — Direct recurring support
+- **[Payrail](https://payrail.ivixivi.workers.dev/pay)** — One-time or flexible contributions
+
+Your support fuels the ORGANVM ecosystem and keeps these tools free and open.
+
 ## ⚖️ License
 
 Distributed under the MIT License. See `LICENSE` for more information.
