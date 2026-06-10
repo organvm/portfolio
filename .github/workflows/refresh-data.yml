@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
 
     steps:
       - name: Checkout
@@ -66,13 +67,26 @@ jobs:
         run: npm run sync:github-pages
 
       - name: Commit and push
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/system-metrics.json src/data/vitals.json src/data/landing.json src/data/github-pages.json
           if git diff --staged --quiet; then
             echo "No data changes"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "chore: auto-refresh system data and github pages index"
             git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      # Commits pushed with the workflow-provided GITHUB_TOKEN do NOT trigger
+      # push-event workflows, so CI (build-and-deploy) never runs for the data
+      # commit and the live Pages site lags main until the next human push.
+      # workflow_dispatch is exempt from that suppression, so dispatch CI here.
+      - name: Trigger CI deploy for the data commit
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref main
