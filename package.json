@@ -116,7 +116,7 @@
 		"hast-util-to-string": "3.0.1",
 		"html-validate": "11.4.0",
 		"lighthouse": "13.1.0",
-		"npm-run-all2": "8.0.4",
+		"npm-run-all2": "9.0.1",
 		"pagefind": "1.5.2",
 		"playwright": "1.59.1",
 		"satori": "0.26.0",
