@@ -29,7 +29,7 @@ const projects = projectCatalog.map((p) => ({
   </div>
 </div>
 
-<script>
+  <script>
   import * as THREE from 'three';
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -40,6 +40,26 @@ const projects = projectCatalog.map((p) => ({
     tags: string[];
     summary: string;
     color: string;
+  }
+
+  function isGalaxyProject(value: unknown): value is GalaxyProject {
+    if (!value || typeof value !== 'object') return false;
+    const project = value as Record<string, unknown>;
+    return (
+      typeof project.slug === 'string' &&
+      typeof project.title === 'string' &&
+      typeof project.organ === 'string' &&
+      typeof project.summary === 'string' &&
+      typeof project.color === 'string' &&
+      Array.isArray(project.tags) &&
+      project.tags.every((tag) => typeof tag === 'string')
+    );
+  }
+
+  function parseGalaxyProjects(raw: string | null): GalaxyProject[] {
+    const parsed = JSON.parse(raw || '[]');
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isGalaxyProject);
   }
 
   function createGlowTexture(color: string) {
@@ -68,7 +88,7 @@ const projects = projectCatalog.map((p) => ({
     const canvas = document.getElementById('omega-galaxy-canvas') as HTMLCanvasElement;
     if (!container || !canvas) return;
 
-    const projects = JSON.parse(container.dataset.projects || '[]') as GalaxyProject[];
+    const projects = parseGalaxyProjects(container.dataset.projects || null);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const controller = new AbortController();
     let rafId = 0;
