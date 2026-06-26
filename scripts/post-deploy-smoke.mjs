@@ -5,7 +5,10 @@
  * Exit 0 = healthy, exit 1 = broken (triggers rollback).
  */
 
-const BASE_URL = process.env.DEPLOY_URL || 'https://4444j99.github.io/portfolio';
+const BASE_URL = (process.env.DEPLOY_URL || 'https://organvm.github.io/portfolio').replace(
+	/\/$/,
+	'',
+);
 
 const CHECKS = [
 	{ path: '/', expect: { status: 200, bodyContains: 'Anthony' } },

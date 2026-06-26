@@ -11,7 +11,7 @@ interface EssayItem {
 }
 
 export function GET(context: APIContext) {
-	const siteBase = 'https://4444j99.github.io/portfolio/';
+	const siteBase = 'https://organvm.github.io/portfolio/';
 	const fallbackProjectDate = new Date('2026-02-10T00:00:00.000Z');
 	const indexSlugs = new Set(projectIndex.map((p) => p.slug));
 
