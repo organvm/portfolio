@@ -1,14 +1,5 @@
 # Portfolio — Anthony James Padavano
 
-
-> **The Expensive Problem:** You are losing high-leverage clients and elite engineering talent because your digital footprint signals legacy, fragility, and noise. You need a centralized, zero-defect orchestration hub that proves architectural mastery without saying a word.
-> 
-> **The Proof is this Repository:** 100/100 Lighthouse performance, 100% test coverage, strict architectural ratchets, zero-dependency data visualization, and an automated central node coordinating 91 decoupled repositories.
-> 
-> **[Deploy this architecture for your shop →](mailto:padavano.anthony@gmail.com)**
-> **[Work with the architect who built this →](mailto:padavano.anthony@gmail.com)**
-
-
 <div align="center">
   <img src="public/favicon.svg" width="120" height="120" alt="ORGANVM Logo" />
   <h3>The central node of an Eight-Organ Creative-Institutional System.</h3>
