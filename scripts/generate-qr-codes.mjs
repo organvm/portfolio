@@ -8,7 +8,7 @@ const personasPath = path.join(__dirname, '../src/data/personas.json');
 const personas = JSON.parse(fs.readFileSync(personasPath, 'utf8')).personas;
 
 const OUTPUT_DIR = path.join(__dirname, '../public/qr');
-const BASE_URL = 'https://4444j99.github.io/portfolio/resume';
+const BASE_URL = 'https://organvm.github.io/portfolio/resume';
 
 async function downloadQR(url, outputPath) {
 	const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}&color=d4a853&bgcolor=0a0a0b`;

@@ -11,7 +11,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const DIST = resolve('dist');
-const SITE_BASE = 'https://4444j99.github.io/portfolio/';
+const SITE_BASE = 'https://organvm.github.io/portfolio/';
 let exitCode = 0;
 
 if (!existsSync(DIST)) {
