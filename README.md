@@ -87,10 +87,10 @@ Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Usage
 
 ### Prerequisites
-- Node.js >= 22
+- Node.js >= 22.19.0
 - npm
 
 ### Installation
@@ -100,22 +100,53 @@ cd portfolio
 npm install
 ```
 
-### Development
-```bash
-npm run dev
-```
+### Core Commands
 
-### Production Build
-```bash
-npm run build
-npm run preview
-```
+| Command | Action |
+| :--- | :--- |
+| `npm run dev` | Syncs trust metrics and starts the Astro development server. |
+| `npm run build` | Generates quality badges, syncs data (vitals, omega, identity), builds the static site, and indexes with Pagefind. |
+| `npm run preview` | Serves the built static site locally. |
+| `npm run lint` | Runs Biome to check formatting and linting. |
+| `npm run lint:fix` | Runs Biome to automatically fix formatting and linting issues. |
+| `npm run typecheck:strict` | Runs strict TypeScript type checking. |
+| `npm run test` | Runs the Vitest test suite. |
+
+### Quality & CI Commands
+
+| Command | Action |
+| :--- | :--- |
+| `npm run preflight` | Runs the complete local verification pipeline: linting, typechecking, building, validating, and testing. |
+| `npm run quality:local` | Runs the full local quality suite including security audits, linting, tests, accessibility checks, performance budgets, and lighthouse. |
+| `npm run test:security` | Runs a security audit and outputs a summary. |
+| `npm run test:a11y` | Runs accessibility audits. |
+
+### Data Sync & Operations
+
+The portfolio relies heavily on static JSON data sourced from the wider ORGANVM system.
+
+| Command | Action |
+| :--- | :--- |
+| `npm run sync:content` | Syncs content from praxis. |
+| `npm run sync:identity` | Syncs identity data. |
+| `npm run sync:vitals` | Syncs trust and system vitals metrics. |
+| `npm run sync:omega` | Syncs omega operational data. |
+| `npm run generate-data` | Generates portfolio data using praxis python scripts and copies system metrics. |
+| `npm run build:resume` | Orchestrates generation of resume PDFs. |
+| `npm run build:qr` | Generates QR codes. |
 
 ### Consult API (Cloudflare Worker)
 
-The consult page now uses a Cloudflare Worker endpoint instead of browser-side third-party SDK calls.
+The consult page uses a Cloudflare Worker endpoint.
 
-1. Set up and deploy the worker in [`workers/consult-api/README.md`](workers/consult-api/README.md).
+| Command | Action |
+| :--- | :--- |
+| `npm run consult:worker:dev` | Runs the consult API worker locally. |
+| `npm run consult:worker:deploy` | Deploys the consult API worker. |
+| `npm run consult:worker:migrate:local` | Applies D1 database migrations locally. |
+| `npm run consult:worker:migrate:remote` | Applies D1 database migrations remotely. |
+
+1. Set up and deploy the worker using the commands above.
 2. Set `PUBLIC_CONSULT_API_BASE` to your worker origin (for example, `https://portfolio-consult-api.<subdomain>.workers.dev`).
 3. Redeploy the Astro site.
 
