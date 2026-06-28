@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import quality from '../quality-metrics.json';
+import type { QualityMetrics } from '../../types/data';
+import rawQuality from '../quality-metrics.json';
+
+const quality = rawQuality as unknown as QualityMetrics;
 
 describe('quality-metrics.json', () => {
 	it('uses measured test totals when artifacts exist, otherwise nullable fallbacks', () => {

@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
 import type { Organ, PraxisTarget, QualityMetrics, SystemMetrics } from '../types/data';
 import { base } from '../utils/paths';
 
-const quality = qualityData as QualityMetrics;
+const quality = qualityData as unknown as QualityMetrics;
 
 const typedMetrics = metrics as unknown as SystemMetrics;
 

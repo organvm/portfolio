@@ -287,7 +287,7 @@ export interface QualityLedgerEntry {
 }
 
 export interface QualityLedger {
-	generated: string;
+	generated: string | null;
 	snapshots: QualityLedgerEntry[];
 }
 
