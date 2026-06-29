@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-29T05:57:48.685Z",
+  "generated": "2026-06-29T09:27:44.919Z",
   "tests": {
     "total": null,
     "passed": null,
@@ -34,10 +34,10 @@
     "githubSource": null
   },
   "coverage": {
-    "statements": 90,
-    "branches": 81,
-    "functions": 85,
-    "lines": 90
+    "statements": 91,
+    "branches": 82,
+    "functions": 87,
+    "lines": 92
   },
   "lighthouse": {
     "performance": null,
