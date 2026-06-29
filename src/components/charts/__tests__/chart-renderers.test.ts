@@ -305,3 +305,39 @@ describe('chart renderers', () => {
 		expect(container.querySelector('svg')).not.toBeNull();
 	});
 });
+
+it('renders organ navigator hover effects on nodes and projects', () => {
+	const container = createContainer();
+	const data = {
+		organs: [
+			{
+				organ: 'ORGAN-I',
+				label: 'Theoria',
+				count: 2,
+				color: '#5aa8ff',
+				projects: [{ slug: 'recursive-engine', title: 'Recursive Engine' }],
+			},
+		],
+	};
+
+	organNavigatorChart(container, data);
+
+	const organNode = container.querySelector('.organ-nodes > g')!;
+	organNode.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+	organNode.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+
+	// Open to render projects
+	organNode.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+	const projectNode = container.querySelector('.project-nodes > g')!;
+	projectNode.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+	projectNode.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+
+	// Trigger project click
+	const originalLocation = window.location;
+	delete (window as any).location;
+	window.location = { href: '' } as any;
+	projectNode.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+	expect(window.location.href).toContain('recursive-engine');
+	Object.defineProperty(window, 'location', { value: originalLocation, configurable: true });
+});
