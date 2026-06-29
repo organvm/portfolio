@@ -2,6 +2,7 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as loader from '../chart-loader';
+import organBarChart from '../organ-bar-chart';
 
 // Mock chart modules at top level
 vi.mock('../organ-bar-chart', () => ({ default: vi.fn() }));
@@ -206,5 +207,47 @@ describe('chart-loader lifecycle', () => {
 		observerCallback([{ isIntersecting: true, target: container }]);
 
 		await vi.advanceTimersByTimeAsync(100);
+	});
+
+	it('re-renders stale charts after mode/theme updates', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		container.dataset.chartData = JSON.stringify({ organs: [] });
+		document.body.appendChild(container);
+
+		let mutationCallback: (records: MutationRecord[]) => void = () => {};
+		const mockMutateObserve = vi.fn();
+		const mockMutateDisconnect = vi.fn();
+
+		class MockMutationObserver {
+			constructor(callback: (records: MutationRecord[]) => void) {
+				mutationCallback = callback;
+			}
+			observe = mockMutateObserve;
+			disconnect = mockMutateDisconnect;
+		}
+
+		vi.stubGlobal('MutationObserver', MockMutationObserver);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+		await vi.advanceTimersByTimeAsync(100);
+
+		expect(organBarChart).toHaveBeenCalledTimes(1);
+
+		observerCallback([{ isIntersecting: false, target: container }]);
+		await vi.advanceTimersByTimeAsync(100);
+
+		mutationCallback([{ type: 'attributes', attributeName: 'data-theme' } as MutationRecord]);
+		await vi.advanceTimersByTimeAsync(400);
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+		await vi.advanceTimersByTimeAsync(100);
+
+		expect(mockMutateObserve).toHaveBeenCalledWith(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['data-theme'],
+		});
+		expect(organBarChart).toHaveBeenCalledTimes(2);
 	});
 });
