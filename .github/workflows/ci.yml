@@ -52,6 +52,8 @@ jobs:
       # --- Test ---
       - name: Unit Tests
         run: npm run test:coverage
+      - name: Package Fixture Tests
+        run: npm run test:github-pages-core
       - name: Validate Build
         run: npm run validate
 
