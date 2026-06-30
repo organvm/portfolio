@@ -49,6 +49,9 @@ jobs:
         env:
           PUBLIC_CONSULT_API_BASE: https://portfolio-consult-api.ivixivi.workers.dev # allow-secret
 
+      - name: Validate runtime route manifest
+        run: npm run sync:a11y-routes && npm run check:runtime-route-manifest
+
       # --- Test ---
       - name: Unit Tests
         run: npm run test:coverage
