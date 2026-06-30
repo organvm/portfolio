@@ -335,9 +335,15 @@ it('renders organ navigator hover effects on nodes and projects', () => {
 
 	// Trigger project click
 	const originalLocation = window.location;
-	delete (window as any).location;
-	window.location = { href: '' } as any;
+	Object.defineProperty(window, 'location', {
+		value: { ...originalLocation, href: '' },
+		writable: true,
+		configurable: true,
+	});
 	projectNode.dispatchEvent(new MouseEvent('click', { bubbles: true }));
 	expect(window.location.href).toContain('recursive-engine');
-	Object.defineProperty(window, 'location', { value: originalLocation, configurable: true });
+	Object.defineProperty(window, 'location', {
+		value: originalLocation,
+		configurable: true,
+	});
 });
