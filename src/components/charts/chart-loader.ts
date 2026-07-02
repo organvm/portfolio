@@ -23,16 +23,16 @@ function isChartId(value: string): value is ChartId {
 	return value in chartModules;
 }
 
-function parseChartPayload(raw: string | undefined, chartId: string) {
+function parseChartPayload(raw: string | undefined, chartId: string): unknown {
 	try {
-		return JSON.parse(raw ?? '{}');
+		return JSON.parse(raw ?? '{}') as unknown;
 	} catch (err) {
 		console.error('[chart]', chartId, 'invalid chart payload:', err);
 		return {};
 	}
 }
 
-function readChartData(container: HTMLElement, chartId: string) {
+function readChartData(container: HTMLElement, chartId: string): unknown {
 	const dataEl = container.querySelector('script[type="application/json"]');
 	if (dataEl) {
 		return parseChartPayload(dataEl.textContent ?? '{}', chartId);
