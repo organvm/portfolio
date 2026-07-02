@@ -1,7 +1,7 @@
 {
   "repos": {
-    "total": 149,
-    "active": 93,
+    "total": 171,
+    "active": 163,
     "orgs": 10
   },
   "substance": {
@@ -9,11 +9,11 @@
     "test_files": 4337,
     "automated_tests": 2000,
     "ci_passing": 107,
-    "ci_coverage_pct": 72
+    "ci_coverage_pct": 63
   },
   "logos": {
     "essays": 49,
-    "words": 740907
+    "words": 988148
   },
-  "timestamp": "2026-07-02T08:50:20.770333+00:00"
+  "timestamp": "2026-07-02T17:52:01.622537+00:00"
 }

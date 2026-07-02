@@ -1,6 +1,7 @@
 ---
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import essayData from '../data/essays.json';
+import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 import type { Essay, EssayData } from '../types/data';
 
@@ -8,7 +9,7 @@ const typedEssayData = essayData as EssayData;
 const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title);
 ---
 
-<Layout title="Essays — Thought Leadership" description={`${typedEssayData.total} strategic and technical essays documenting the 149-repository system's architectural evolution.`}>
+<Layout title="Essays — Thought Leadership" description={`${typedEssayData.total} strategic and technical essays documenting the ${vitals.repos.total}-repository system's architectural evolution.`}>
     <div class="sketch-accent">
       <SketchContainer sketchId="token-stream" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
     </div>

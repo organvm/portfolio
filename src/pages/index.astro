@@ -8,6 +8,7 @@ import HeroBentoCell from '../components/home/HeroBentoCell.astro';
 import PersonaBentoCell from '../components/home/PersonaBentoCell.astro';
 import { organColorMap } from '../data/organ-colors';
 import { featuredNumbers, organGroups } from '../data/organ-groups';
+import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
 
@@ -30,7 +31,7 @@ const nonFeatured = allProjects.filter((p) => !featuredNumbers.has(p.number)).sl
 
 <Layout
 	title="Anthony James Padavano — AI Orchestration Architect"
-	description="Portfolio of Anthony James Padavano — AI Orchestration Architect, Systems Engineer, and Creative Technologist building a 149-repository autonomous creative-institutional system."
+	description={`Portfolio of Anthony James Padavano — AI Orchestration Architect, Systems Engineer, and Creative Technologist building a ${vitals.repos.total}-repository autonomous creative-institutional system.`}
 	mainAttrs={{ 'data-portfolio-view': 'engineering' }}
 	keywords={['AI Orchestration', 'Systems Architect', 'Platform Governance', 'Logocentric Architecture', 'Staff Engineer', 'Multi-Agent Systems', 'Python', 'TypeScript', 'CI/CD Automation']}
 >

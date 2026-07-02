@@ -62,6 +62,14 @@ def transform_for_portfolio(canonical: dict, portfolio_path: Path) -> dict:
     # canonical values win for shared keys.
     portfolio["computed"] = {**portfolio.get("computed", {}), **c}
 
+    # Derive the short word-count label from the live numeric total. The corpus emits
+    # `total_words_numeric` but not `total_words_short`, so the wholesale merge above
+    # would otherwise preserve a STALE short label (e.g. "741K+") from the old
+    # portfolio computed block — the same silent-stale-subfield bug as 116-vs-149.
+    tw_num = c.get("total_words_numeric")
+    if tw_num:
+        portfolio["computed"]["total_words_short"] = f"{round(tw_num / 1000)}K+"
+
     reg = portfolio.get("registry", {})
     reg["total_repos"] = c["total_repos"]
     reg["total_organs"] = c["total_organs"]
@@ -103,7 +111,11 @@ def compute_vitals(canonical: dict, snapshot: dict | None = None) -> dict:
     # We now fetch these from the top level of canonical instead of a 'manual' block.
     # Set default minimum values if missing to ensure data-integrity.
     auto_tests = canonical.get("automated_tests", 2000)
-    doc_words = canonical.get("documentation_words", 300000)
+    # Derive the doc word count from the live corpus total — never a hardcoded stub.
+    # The corpus emits computed.total_words_numeric / documentation_words (988148,
+    # word_count_basis=live-corpus-content). A missing value must surface as 0 (the
+    # >0 data-integrity check fails loudly) rather than silently showing a fake ~300k.
+    doc_words = c.get("total_words_numeric") or c.get("documentation_words") or 0
 
     # code_files and test_files don't strictly exist mapped directly in the old way,
     # we can do an estimation based on repo count and tests if they aren't provided.

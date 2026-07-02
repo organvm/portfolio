@@ -206,15 +206,31 @@ describe('live-claim repo counts derive from vitals (no drifted hardcodes)', () 
 	// vitals so they track the corpus automatically (total / active / CI-covered).
 	const CANONICAL = new Set([vitals.repos.total, vitals.repos.active, vitals.substance.ci_passing]);
 	// Documented narrative/subset counts that are intentionally NOT the ecosystem
-	// total. Each is a real subset or a dated event — adding one is a deliberate,
-	// reviewed act, which is the point: an *undocumented* drift still fails CI.
-	const DOCUMENTED_SUBSETS = new Map<number, string>([
-		[12, 'projects.json — performance-platform consolidation (12 named repos)'],
-		[18, 'orchestration-hub.astro — per-organ repo-count diagram'],
-		[21, 'orchestration-hub.astro — per-organ repo-count diagram'],
-		[22, 'orchestration-hub.astro — per-organ repo-count diagram'],
-		[82, 'eight-organ-system.astro — Veritas Sprint historical event count (dated)'],
-	]);
+	// total. Each is a real subset or a DATED snapshot, and is scoped to the file it
+	// legitimately appears in — so the exemption can never silently whitelist a stale
+	// total elsewhere. A live surface (hero, /about, OG, meta) derives from vitals and
+	// carries NO literal; a future "149" reappearing there still fails CI. Prose lags
+	// gracefully only where explicitly documented and dated. Adding one is deliberate.
+	const DOCUMENTED_SUBSETS: { value: number; file: string; reason: string }[] = [
+		{
+			value: 12,
+			file: 'projects.json',
+			reason: 'performance-platform consolidation (12 named repos)',
+		},
+		{ value: 18, file: 'orchestration-hub.astro', reason: 'per-organ repo-count diagram' },
+		{ value: 21, file: 'orchestration-hub.astro', reason: 'per-organ repo-count diagram' },
+		{ value: 22, file: 'orchestration-hub.astro', reason: 'per-organ repo-count diagram' },
+		{
+			value: 82,
+			file: 'eight-organ-system.astro',
+			reason: 'Veritas Sprint historical event count (dated)',
+		},
+		{
+			value: 149,
+			file: 'case-study-organvm.json',
+			reason: 'dated ORGANVM case-study snapshot (2026-03-13)',
+		},
+	];
 
 	it('every "<N> repositories" literal in live source is canonical or a documented subset', () => {
 		const offenders: string[] = [];
@@ -224,7 +240,8 @@ describe('live-claim repo counts derive from vitals (no drifted hardcodes)', () 
 			let m: RegExpExecArray | null;
 			while ((m = re.exec(text)) !== null) {
 				const n = Number(m[1] ?? m[2]);
-				if (!CANONICAL.has(n) && !DOCUMENTED_SUBSETS.has(n)) {
+				const documented = DOCUMENTED_SUBSETS.some((s) => s.value === n && file.includes(s.file));
+				if (!CANONICAL.has(n) && !documented) {
 					offenders.push(`${file.slice(SRC.length + 1)}: "${m[0].trim()}"`);
 				}
 			}
