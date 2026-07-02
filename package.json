@@ -89,7 +89,7 @@
 		"@4444j99/quality-ratchet-kit": "file:packages/quality-ratchet-kit",
 		"@4444j99/shibui-rhetoric": "file:packages/shibui-rhetoric",
 		"@4444j99/sketches": "file:packages/sketches",
-		"@astrojs/mdx": "6.0.3",
+		"@astrojs/mdx": "7.0.0",
 		"@astrojs/rss": "4.0.18",
 		"@astrojs/sitemap": "3.7.3",
 		"@meta-organvm/github-pages-index-core": "file:packages/github-pages-index-core",
