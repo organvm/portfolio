@@ -93,7 +93,7 @@
 		"@astrojs/rss": "4.0.18",
 		"@astrojs/sitemap": "3.7.3",
 		"@meta-organvm/github-pages-index-core": "file:packages/github-pages-index-core",
-		"astro": "^6.4.8",
+		"astro": "^7.0.2",
 		"d3": "7.9.0",
 		"dompurify": "3.4.11",
 		"mermaid": "11.15.0",
