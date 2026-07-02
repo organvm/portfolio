@@ -23,7 +23,7 @@
 				},
 				{
 					"slug": "ai-conductor",
-					"impact": "Architected a high-volume documentation methodology for human-AI co-creation. Scaled technical output to ~400K words across 91 repositories with automated quality gates and link-integrity validation."
+					"impact": "Architected a high-volume documentation methodology for human-AI co-creation. Scaled technical output to ~400K words across 149 repositories with automated quality gates and link-integrity validation."
 				},
 				{
 					"slug": "ai-council",
@@ -59,7 +59,7 @@
 				},
 				{
 					"slug": "orchestration-hub",
-					"impact": "Engineered the central nervous system for a 91-repository ecosystem. Automated dependency validation (31 unique edges) and implemented a machine-readable governance registry."
+					"impact": "Engineered the central nervous system for a 149-repository ecosystem. Automated dependency validation (31 unique edges) and implemented a machine-readable governance registry."
 				},
 				{
 					"slug": "metasystem-master",
@@ -131,7 +131,7 @@
 				},
 				{
 					"slug": "org-architecture",
-					"impact": "Authored machine-readable promotion criteria and monthly audit protocols. Automated the validation of system-wide invariants across 91 repositories."
+					"impact": "Authored machine-readable promotion criteria and monthly audit protocols. Automated the validation of system-wide invariants across 149 repositories."
 				},
 				{
 					"slug": "public-process",

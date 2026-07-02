@@ -1,5 +1,5 @@
 {
-  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
     "total_repos": 149,
@@ -8,7 +8,7 @@
     "dependency_edges": 62,
     "ci_workflows": 107,
     "operational_organs": 10,
-    "sprints_completed": 33
+    "sprints_completed": 0
   },
   "organs": [
     {
@@ -103,5 +103,5 @@
     }
   ],
   "sprint_history": [],
-  "generated": "2026-07-02T14:04:41.613436+00:00"
+  "generated": "2026-07-02T08:50:20.770333+00:00"
 }

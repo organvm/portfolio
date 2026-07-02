@@ -1,7 +1,7 @@
 {
   "generated": "2026-03-13T17:57:08.661606+00:00",
   "title": "ORGANVM: One-Person Enterprise Architecture",
-  "subtitle": "How AI-conducted automation enables a single director to operate 113 repositories across 8 functional organs",
+  "subtitle": "How AI-conducted automation enables a single director to operate 149 repositories across 8 functional organs",
   "system_stats": {
     "total_repos": 113,
     "organs": 8,
@@ -102,7 +102,7 @@
   "validation_evidence": {
     "soak_test": "32 consecutive days, 0 incidents (target: 30, complete)",
     "test_coverage": "4,015+ automated tests, 6 test suites",
-    "ci_coverage": "104 repos with CI workflows",
+    "ci_coverage": "107 repos with CI workflows",
     "schema_validation": "9 JSON Schemas with examples",
     "governance_audit": "Automated policy evaluation across all entities",
     "operational_readiness": "6 runbooks + operational handoff guide"

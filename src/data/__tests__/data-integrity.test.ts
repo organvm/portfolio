@@ -1,3 +1,6 @@
+import { readdirSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import about from '../about.json';
 import essays from '../essays.json';
@@ -164,12 +167,71 @@ describe('system-metrics.json', () => {
 		expect(Object.keys(perOrgan).length).toBeGreaterThan(0);
 		for (const [organ, data] of Object.entries(perOrgan) as [string, any][]) {
 			expect(organ).toBeTruthy();
-			expect(data.repos).toBeGreaterThan(0);
+			// An organ can be legitimately empty (e.g. ORGAN-PSG, a governance organ
+			// with no repos yet). Assert it's a real non-negative count, not that it's non-empty.
+			expect(typeof data.repos).toBe('number');
+			expect(data.repos).toBeGreaterThanOrEqual(0);
 		}
 	});
 
 	it('contains documentation and test metrics', () => {
 		const wc = systemMetrics.computed.word_counts;
 		expect(wc).toBeTruthy();
+	});
+});
+
+describe('live-claim repo counts derive from vitals (no drifted hardcodes)', () => {
+	// The repo count is asserted in many places (hero, page meta, OG image, persona/CV data).
+	// Every *current-state* claim must equal vitals.repos.total — the single source of truth.
+	// Dated essays under src/content/** are moment-in-time snapshots and are intentionally exempt:
+	// rewriting a timestamped reflection to today's number would falsify the record.
+	const SRC = join(dirname(fileURLToPath(import.meta.url)), '..', '..'); // -> src/
+	const EXEMPT = ['/content/', '/__tests__/'];
+	const walk = (dir: string): string[] => {
+		const out: string[] = [];
+		for (const ent of readdirSync(dir, { withFileTypes: true })) {
+			const p = join(dir, ent.name);
+			if (ent.isDirectory()) {
+				if (!p.includes('node_modules')) out.push(...walk(p));
+			} else if (/\.(astro|ts|tsx|json)$/.test(ent.name)) {
+				out.push(p);
+			}
+		}
+		return out;
+	};
+	// matches "<N> repositories", "<N>-repository", "<N> repos" — but NOT "<N> tests/organs/edges" etc.
+	const REPO_COUNT = /(\d{2,4})[\s-]repositor|(\d{2,4})\srepos\b/g;
+
+	// Canonical values a repo-count literal may legitimately equal — derived from
+	// vitals so they track the corpus automatically (total / active / CI-covered).
+	const CANONICAL = new Set([vitals.repos.total, vitals.repos.active, vitals.substance.ci_passing]);
+	// Documented narrative/subset counts that are intentionally NOT the ecosystem
+	// total. Each is a real subset or a dated event — adding one is a deliberate,
+	// reviewed act, which is the point: an *undocumented* drift still fails CI.
+	const DOCUMENTED_SUBSETS = new Map<number, string>([
+		[12, 'projects.json — performance-platform consolidation (12 named repos)'],
+		[18, 'orchestration-hub.astro — per-organ repo-count diagram'],
+		[21, 'orchestration-hub.astro — per-organ repo-count diagram'],
+		[22, 'orchestration-hub.astro — per-organ repo-count diagram'],
+		[82, 'eight-organ-system.astro — Veritas Sprint historical event count (dated)'],
+	]);
+
+	it('every "<N> repositories" literal in live source is canonical or a documented subset', () => {
+		const offenders: string[] = [];
+		for (const file of walk(SRC).filter((p) => !EXEMPT.some((e) => p.includes(e)))) {
+			const text = readFileSync(file, 'utf8');
+			const re = new RegExp(REPO_COUNT.source, 'g');
+			let m: RegExpExecArray | null;
+			while ((m = re.exec(text)) !== null) {
+				const n = Number(m[1] ?? m[2]);
+				if (!CANONICAL.has(n) && !DOCUMENTED_SUBSETS.has(n)) {
+					offenders.push(`${file.slice(SRC.length + 1)}: "${m[0].trim()}"`);
+				}
+			}
+		}
+		expect(
+			offenders,
+			`stale repo-count literals — must equal a canonical value (total=${vitals.repos.total}, active=${vitals.repos.active}, ci=${vitals.substance.ci_passing}) or a DOCUMENTED_SUBSETS entry:\n  ${offenders.join('\n  ')}`,
+		).toEqual([]);
 	});
 });

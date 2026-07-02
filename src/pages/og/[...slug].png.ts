@@ -34,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		{
 			slug: 'dashboard',
 			title: 'Dashboard',
-			subtitle: 'System metrics across 91 repositories and 8 organs',
+			subtitle: 'System metrics across 149 repositories and 8 organs',
 		},
 		{
 			slug: 'essays',

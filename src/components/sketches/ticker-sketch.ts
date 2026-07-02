@@ -14,7 +14,7 @@ export default function tickerSketch(p: p5, container: HTMLElement) {
 
 	const headlines = [
 		'BREAKING: System achieves full autonomy',
-		'91 repos | 8 organs | OPERATIONAL',
+		'149 repos | 8 organs | OPERATIONAL',
 		'Essay count: 29 | ~111K words',
 		'Engagement: +23% MoM',
 		'Retention: 41% at month-6',

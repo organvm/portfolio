@@ -2,17 +2,17 @@
   "schema_version": "1.0",
   "generated": "2026-07-02T08:50:20.770333+00:00",
   "computed": {
-    "total_repos": 116,
-    "active_repos": 62,
-    "archived_repos": 53,
-    "total_organs": 8,
-    "operational_organs": 8,
-    "ci_workflows": 104,
-    "dependency_edges": 55,
+    "total_repos": 149,
+    "active_repos": 93,
+    "archived_repos": 54,
+    "total_organs": 10,
+    "operational_organs": 10,
+    "ci_workflows": 107,
+    "dependency_edges": 62,
     "per_organ": {
       "ORGAN-I": {
         "name": "Theory",
-        "repos": 20
+        "repos": 26
       },
       "ORGAN-II": {
         "name": "Art",
@@ -20,15 +20,15 @@
       },
       "ORGAN-III": {
         "name": "Commerce",
-        "repos": 29
+        "repos": 32
       },
       "ORGAN-IV": {
         "name": "Orchestration",
-        "repos": 11
+        "repos": 22
       },
       "ORGAN-V": {
         "name": "Public Process",
-        "repos": 2
+        "repos": 6
       },
       "ORGAN-VI": {
         "name": "Community",
@@ -36,17 +36,25 @@
       },
       "ORGAN-VII": {
         "name": "Marketing",
-        "repos": 4
+        "repos": 6
+      },
+      "ORGAN-PSG": {
+        "name": "Process Sequence Governance",
+        "repos": 0
+      },
+      "PERSONAL": {
+        "name": "Personal / Liminal",
+        "repos": 5
       },
       "META-ORGANVM": {
         "name": "Meta",
-        "repos": 12
+        "repos": 14
       }
     },
     "implementation_status": {
-      "ACTIVE": 62,
-      "ARCHIVED": 53,
-      "PROTOTYPE": 1
+      "ACTIVE": 93,
+      "ARCHIVED": 54,
+      "PROTOTYPE": 2
     },
     "word_counts": {
       "readmes": 137315,
@@ -60,7 +68,44 @@
     "total_words_short": "741K+",
     "code_files": 23121,
     "test_files": 4337,
-    "repos_with_tests": 47
+    "repos_with_tests": 47,
+    "sprints_completed": 33,
+    "sprint_names": [
+      "01-ignition",
+      "02-propulsion",
+      "03-ascension",
+      "04-exodus",
+      "05-perfection",
+      "06-autonomy",
+      "07-genesis",
+      "08-alchemia",
+      "09-convergence",
+      "10-praxis",
+      "11-veritas",
+      "12-illustratio",
+      "13-manifestatio",
+      "14-operatio",
+      "15-gap-fill",
+      "16-platinum",
+      "17-remedium",
+      "18-synchronium",
+      "19-concordia",
+      "20-tripartitum",
+      "21-submissio",
+      "22-metricum",
+      "23-publicatio",
+      "24-canon",
+      "25-inspectio",
+      "26-propagatio",
+      "27-beta-vitae",
+      "28-recognitio",
+      "29-automata",
+      "30-distributio",
+      "31-fundamen",
+      "32-sensoria",
+      "33-operatio"
+    ],
+    "published_essays": 29
   },
   "manual": {
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
