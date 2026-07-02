@@ -4,8 +4,8 @@
   <img src="public/favicon.svg" width="120" height="120" alt="ORGANVM Logo" />
   <h3>The central node of an Eight-Organ Creative-Institutional System.</h3>
   
-  [![Live Site](https://img.shields.io/badge/Live-4444j99.github.io/portfolio-00BCD4?style=for-the-badge&logo=github)](https://4444j99.github.io/portfolio/)
-  [![Quality Gates](https://github.com/4444j99/portfolio/actions/workflows/quality.yml/badge.svg?style=for-the-badge)](https://github.com/4444j99/portfolio/actions/workflows/quality.yml)
+  [![Live Site](https://img.shields.io/badge/Live-organvm.github.io/portfolio-00BCD4?style=for-the-badge&logo=github)](https://organvm.github.io/portfolio/)
+  [![CI](https://github.com/organvm/portfolio/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/organvm/portfolio/actions/workflows/ci.yml)
   [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 </div>
 
@@ -13,9 +13,9 @@
 
 ## 🔭 Overview
 
-Personal portfolio site showcasing 20 project case studies, an interactive p5.js generative hero, and a live engineering dashboard. The project is organized around the **ORGANVM** system—a polymathic framework spanning 91 repositories and 8 GitHub organizations.
+Personal portfolio site showcasing 19 project case studies, an interactive p5.js generative hero, and a live engineering dashboard. The project is organized around the **ORGANVM** system—a polymathic framework spanning 91 repositories and 8 GitHub organizations.
 
-*   **Live Hub:** [4444j99.github.io/portfolio](https://4444j99.github.io/portfolio/)
+*   **Live Hub:** [organvm.github.io/portfolio](https://organvm.github.io/portfolio/)
 *   **Architecture:** [The Eight-Organ System](https://github.com/meta-organvm)
 
 ![Portfolio Preview](docs/assets/homepage-full.png)
@@ -96,7 +96,7 @@ Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `
 ### Install
 
 ```bash
-git clone https://github.com/4444j99/portfolio
+git clone https://github.com/organvm/portfolio
 cd portfolio
 npm install
 ```
