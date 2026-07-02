@@ -40,9 +40,6 @@ function buildPathIndex(allFiles) {
 }
 
 function resolveHref(href, relDir) {
-	if (href.startsWith('/portfolio/')) {
-		return href.replace('/portfolio/', '');
-	}
 	if (href.startsWith('/')) {
 		return href.slice(1);
 	}
@@ -96,8 +93,8 @@ describe('internal link checking logic', () => {
 	]);
 	const allPaths = buildPathIndex(mockFiles);
 
-	it('resolves absolute links with /portfolio/ prefix', () => {
-		const resolved = resolveHref('/portfolio/about/', '');
+	it('resolves absolute links with / prefix (root-relative)', () => {
+		const resolved = resolveHref('/about/', '');
 		assert.ok(isLinkFound(resolved, allPaths), `Should find: ${resolved}`);
 	});
 
@@ -112,7 +109,7 @@ describe('internal link checking logic', () => {
 	});
 
 	it('detects broken links', () => {
-		const resolved = resolveHref('/portfolio/nonexistent/', '');
+		const resolved = resolveHref('/nonexistent/', '');
 		assert.ok(!isLinkFound(resolved, allPaths), 'Nonexistent page should not be found');
 	});
 
@@ -128,7 +125,7 @@ describe('internal link checking logic', () => {
 		assert.ok(skipPattern.test('https://example.com'));
 		assert.ok(skipPattern.test('mailto:test@test.com'));
 		assert.ok(skipPattern.test('data:image/png;base64,abc'));
-		assert.ok(!skipPattern.test('/portfolio/about/'));
+		assert.ok(!skipPattern.test('/about/'));
 		assert.ok(!skipPattern.test('relative/path'));
 	});
 });

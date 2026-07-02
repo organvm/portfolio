@@ -1,7 +1,7 @@
 // Service Worker — network-first HTML, cache-first assets
 const CACHE_VERSION = 'v2';
 const CACHE_NAME = `portfolio-${CACHE_VERSION}`;
-const BASE = '/portfolio';
+const BASE = '';
 
 // Assets to precache on install
 const PRECACHE_URLS = [

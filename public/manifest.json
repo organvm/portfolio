@@ -2,24 +2,24 @@
 	"name": "Anthony James Padavano — Portfolio",
 	"short_name": "4444j99",
 	"description": "Creative technologist building autonomous creative systems",
-	"start_url": "/portfolio/",
-	"scope": "/portfolio/",
+	"start_url": "/",
+	"scope": "/",
 	"display": "standalone",
 	"background_color": "#0a0a0b",
 	"theme_color": "#0a0a0b",
 	"icons": [
 		{
-			"src": "/portfolio/favicon.svg",
+			"src": "/favicon.svg",
 			"type": "image/svg+xml",
 			"sizes": "any"
 		},
 		{
-			"src": "/portfolio/icon-192.png",
+			"src": "/icon-192.png",
 			"type": "image/png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "/portfolio/icon-512.png",
+			"src": "/icon-512.png",
 			"type": "image/png",
 			"sizes": "512x512"
 		}

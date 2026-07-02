@@ -38,7 +38,7 @@ if (!existsSync(manifestPath)) {
 }
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
-const BASE_PATH = manifest.basePath ?? '/portfolio';
+const BASE_PATH = manifest.basePath ?? '';
 const ROUTES = manifest.routes ?? [];
 
 function normalizeRoute(routePath) {

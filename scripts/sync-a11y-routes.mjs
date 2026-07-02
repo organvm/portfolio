@@ -120,7 +120,7 @@ async function generateA11yRoutes() {
 	}
 
 	const manifest = {
-		basePath: '/portfolio',
+		basePath: '',
 		routes,
 	};
 

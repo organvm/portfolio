@@ -198,7 +198,7 @@
       "horizon": "H5",
       "status": "in_progress",
       "evidence": "Portfolio live with omega scorecard, system metrics, 19 case studies, 49 essays, persona cards, consulting CTA. 0 npm vulnerabilities, 459 tests, self-healing CI, post-deploy rollback. Real-user Core Web Vitals via Plausible. Pending external validation events.",
-      "evidenceUrl": "https://4444j99.github.io/portfolio/omega",
+      "evidenceUrl": "https://4444j99.dev/omega",
       "target": "Pending external validation"
     },
     {

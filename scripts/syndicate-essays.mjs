@@ -22,7 +22,7 @@ import { basename, join, resolve } from 'node:path';
 const ROOT = resolve(import.meta.dirname, '..');
 const LOGOS_DIR = join(ROOT, 'src', 'content', 'logos');
 const OUT_DIR = join(ROOT, 'dist-syndication', 'devto');
-const CANONICAL_BASE = 'https://organvm.github.io/portfolio/logos';
+const CANONICAL_BASE = 'https://4444j99.dev/logos';
 
 /**
  * Parse YAML-ish frontmatter from a markdown file.

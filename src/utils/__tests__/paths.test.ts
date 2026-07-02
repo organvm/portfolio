@@ -7,9 +7,9 @@ describe('paths', () => {
 		expect(canonicalBase).toMatch(/^https:\/\//);
 	});
 
-	it('canonicalBase includes /portfolio path', () => {
+	it('canonicalBase is at the root path', () => {
 		const url = new URL(canonicalBase);
-		expect(url.pathname).toBe('/portfolio');
+		expect(url.pathname).toBe('/');
 	});
 
 	it('canonicalBase has no trailing slash', () => {

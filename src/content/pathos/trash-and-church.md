@@ -17,19 +17,19 @@ artifacts:
     url: "https://github.com/meta-organvm/organvm-ontologia"
     type: repo
   - label: "System Architecture"
-    url: "/portfolio/architecture/"
+    url: "/architecture/"
     type: system
   - label: "Live Dashboard"
-    url: "/portfolio/dashboard/"
+    url: "/dashboard/"
     type: system
   - label: "Stakeholder Portal"
     url: "https://stakeholder-portal-ten.vercel.app/"
     type: system
   - label: "Omega Scorecard"
-    url: "/portfolio/omega/"
+    url: "/omega/"
     type: artifact
   - label: "Philosophy"
-    url: "/portfolio/philosophy/"
+    url: "/philosophy/"
     type: artifact
 tags:
   - studio-vision

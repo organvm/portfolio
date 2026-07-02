@@ -21,7 +21,7 @@ const directory = pagesDirectory as {
 };
 
 export function GET(context: APIContext) {
-	const siteBase = 'https://organvm.github.io/portfolio/';
+	const siteBase = context.site ? context.site.toString().replace(/\/$/, '') + '/' : 'https://4444j99.dev/';
 	const fallbackDate = Number.isFinite(Date.parse(directory.generatedAt))
 		? new Date(directory.generatedAt)
 		: new Date();

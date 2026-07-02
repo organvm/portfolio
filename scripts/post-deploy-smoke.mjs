@@ -5,7 +5,7 @@
  * Exit 0 = healthy, exit 1 = broken (triggers rollback).
  */
 
-const BASE_URL = (process.env.DEPLOY_URL || 'https://organvm.github.io/portfolio').replace(
+const BASE_URL = (process.env.DEPLOY_URL || 'https://4444j99.dev').replace(
 	/\/$/,
 	'',
 );

@@ -33,7 +33,7 @@ if (existsSync(projectPagesDir)) {
 	for (const file of readdirSync(projectPagesDir)) {
 		if (file.endsWith('.astro')) {
 			const slug = file.replace('.astro', '');
-			CASE_STUDY_MAP[slug] = `https://organvm.github.io/portfolio/projects/${slug}/`;
+			CASE_STUDY_MAP[slug] = `https://4444j99.dev/projects/${slug}/`;
 		}
 	}
 }
@@ -73,8 +73,8 @@ function makeFooter(owner, repoName) {
 	const caseStudy = findCaseStudy(repoName);
 
 	const links = [
-		`[Portfolio](https://organvm.github.io/portfolio/)`,
-		`[System Directory](https://organvm.github.io/portfolio/directory/)`,
+		`[Portfolio](https://4444j99.dev/)`,
+		`[System Directory](https://4444j99.dev/directory/)`,
 		`[ORGAN ${organName}](${organUrl})`,
 	];
 
@@ -87,7 +87,7 @@ function makeFooter(owner, repoName) {
 		'',
 		'---',
 		'',
-		`<sub>${links.join(' \u00B7 ')} \u00B7 Part of the <a href="https://organvm.github.io/portfolio/directory/">ORGANVM eight-organ system</a></sub>`,
+		`<sub>${links.join(' \u00B7 ')} \u00B7 Part of the <a href="https://4444j99.dev/directory/">ORGANVM eight-organ system</a></sub>`,
 		'',
 		'<!-- SYSTEM-NAV-END -->',
 	].join('\n');

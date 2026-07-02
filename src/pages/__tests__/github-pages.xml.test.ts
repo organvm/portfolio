@@ -9,7 +9,7 @@ vi.mock('@astrojs/rss', () => ({
 describe('github-pages.xml.ts', () => {
 	it('should generate an RSS feed response for github pages', () => {
 		const context = {
-			site: new URL('https://4444j99.github.io/portfolio/'),
+			site: new URL('https://4444j99.dev/'),
 		} as any;
 
 		const response = GET(context);

@@ -38,7 +38,7 @@ interface Props {
 	shibuiFloor?: 'overview' | 'standard' | 'full';
 }
 
-const slug = Astro.url.pathname.replace(/^\/portfolio\//, '').replace(/\/$/, '') || 'index';
+const slug = Astro.url.pathname.replace(/^\//, '').replace(/\/$/, '') || 'index';
 const defaultOG = `${canonicalBase}/og/${slug}.png`;
 const {
 	title,
@@ -50,7 +50,7 @@ const {
 	keywords = [],
 	shibuiFloor,
 } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, 'https://organvm.github.io').href;
+const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.dev').href;
 ---
 
 <!doctype html>
