@@ -87,10 +87,10 @@ Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Usage
 
 ### Prerequisites
-- Node.js >= 22
+- Node.js `>= 22.19.0`
 - npm
 
 ### Installation
@@ -100,20 +100,35 @@ cd portfolio
 npm install
 ```
 
-### Development
-```bash
-npm run dev
-```
+### Key Commands
 
-### Production Build
-```bash
-npm run build
-npm run preview
-```
+**Development & Building**
+- `npm run dev` — Syncs vitals and starts the Astro development server.
+- `npm run build` — Generates badges, syncs data, builds the static site, and generates the Pagefind search index.
+- `npm run preview` — Previews the production build locally.
+
+**Quality & Testing**
+- `npm run lint` — Runs the Biome linter.
+- `npm run lint:fix` — Runs the Biome linter and applies safe fixes.
+- `npm run typecheck` — Runs Astro type checking.
+- `npm run test` — Runs the Vitest test suite.
+- `npm run preflight` — Runs linting, strict typechecking, build, validation, and tests.
+- `npm run quality:local` — Runs the comprehensive local quality ratchet (security, testing, and core quality checks).
+
+**Data Operations**
+- `npm run generate-data` — Regenerates system metrics and portfolio data.
+- `npm run sync:content` — Syncs content from the praxis source.
+- `npm run sync:identity` — Syncs identity data.
+- `npm run sync:omega` — Syncs omega configuration.
+- `npm run sync:vitals` — Syncs trust metrics and system vitals.
 
 ### Consult API (Cloudflare Worker)
 
-The consult page now uses a Cloudflare Worker endpoint instead of browser-side third-party SDK calls.
+The consult page uses a Cloudflare Worker endpoint for server-side analysis. The API is managed via:
+- `npm run consult:worker:dev` — Starts local worker development.
+- `npm run consult:worker:deploy` — Deploys the worker to Cloudflare.
+- `npm run consult:worker:migrate:local` — Applies D1 database migrations locally.
+- `npm run consult:worker:migrate:remote` — Applies D1 database migrations remotely.
 
 1. Set up and deploy the worker in [`workers/consult-api/README.md`](workers/consult-api/README.md).
 2. Set `PUBLIC_CONSULT_API_BASE` to your worker origin (for example, `https://portfolio-consult-api.<subdomain>.workers.dev`).
