@@ -1,4 +1,5 @@
 import type p5 from 'p5';
+import vitals from '../../data/vitals.json';
 import { getTextColor } from './palette';
 
 interface TickerItem {
@@ -14,8 +15,8 @@ export default function tickerSketch(p: p5, container: HTMLElement) {
 
 	const headlines = [
 		'BREAKING: System achieves full autonomy',
-		'149 repos | 8 organs | OPERATIONAL',
-		'Essay count: 29 | ~111K words',
+		`${vitals.repos.total} repos | 8 organs | OPERATIONAL`,
+		`Essay count: ${vitals.logos.essays} | ~${Math.round(vitals.logos.words / 1000)}K words`,
 		'Engagement: +23% MoM',
 		'Retention: 41% at month-6',
 		'3,586 code files across system',

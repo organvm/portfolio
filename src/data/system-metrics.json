@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-07-02T08:50:20.770333+00:00",
+  "generated": "2026-07-02T17:52:01.622537+00:00",
   "computed": {
-    "total_repos": 149,
-    "active_repos": 93,
-    "archived_repos": 54,
+    "total_repos": 171,
+    "active_repos": 163,
+    "archived_repos": 8,
     "total_organs": 10,
     "operational_organs": 10,
     "ci_workflows": 107,
@@ -52,20 +52,19 @@
       }
     },
     "implementation_status": {
-      "ACTIVE": 93,
-      "ARCHIVED": 54,
-      "PROTOTYPE": 2
+      "ACTIVE": 163,
+      "ARCHIVED": 8
     },
     "word_counts": {
-      "readmes": 137315,
-      "essays": 144924,
-      "corpus": 453152,
-      "org_profiles": 5516,
-      "total": 740907
+      "readmes": 171918,
+      "essays": 32424,
+      "corpus": 783806,
+      "org_profiles": 0,
+      "total": 988148
     },
     "total_words": "~741,000+",
-    "total_words_numeric": 740907,
-    "total_words_short": "741K+",
+    "total_words_numeric": 988148,
+    "total_words_short": "988K+",
     "code_files": 23121,
     "test_files": 4337,
     "repos_with_tests": 47,
@@ -105,19 +104,26 @@
       "32-sensoria",
       "33-operatio"
     ],
-    "published_essays": 29
+    "published_essays": 65,
+    "curated_repos": 149,
+    "public_repos_all": 200,
+    "public_forks": 29,
+    "per_organ_basis": "curated-registry",
+    "repo_count_basis": "live-public-gh-api",
+    "repo_owners_counted": 10,
+    "word_count_basis": "live-corpus-content",
+    "documentation_words": 988148
   },
   "manual": {
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 149,
+    "total_repos": 171,
     "total_organs": 10,
     "operational_organs": 10,
     "implementation_status": {
-      "ACTIVE": 93,
-      "ARCHIVED": 54,
-      "PROTOTYPE": 2
+      "ACTIVE": 163,
+      "ARCHIVED": 8
     },
     "ci_coverage": 107,
     "dependency_edges": 62,
@@ -165,6 +171,6 @@
     }
   },
   "essays": {
-    "total": 29
+    "total": 65
   }
 }

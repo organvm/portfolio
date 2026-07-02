@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  # Daily refresh + on-demand from the corpus metrics beat. The build's
+  # "Refresh canonical metrics from corpus" step re-fetches live counts and the
+  # deploy steps (gated on ref==main && event!=pull_request) redeploy the site, so
+  # a schedule/dispatch event keeps the live numbers current without a human push.
+  # This absorbs the retired refresh-data.yml (no commit->PR->auto-merge dance).
+  schedule:
+    - cron: '30 6 * * *' # 06:30 UTC, 30 min after the corpus metrics-refresh
+  repository_dispatch:
+    types: [metrics-refresh]
 
 permissions:
   contents: read
@@ -32,6 +41,36 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      # --- Refresh canonical metrics from the corpus SSOT (fresh at deploy) ---
+      # The repo/essay counts derive LIVE in organvm/organvm-corpvs-testamentvm
+      # (system-metrics.json → repo_count_basis=live-public-gh-api). Fetch it fresh
+      # here so every deploy shows the current derived number instead of a committed
+      # snapshot — this is why 149 could go stale while the corpus moved to 171.
+      # Runs before lint/build/test so ALL of them (incl. the data-integrity guard)
+      # see the fresh numbers. FAIL-SAFE: a transient corpus/API error leaves the
+      # committed src/data intact and the build continues on last-known-good — never
+      # break the live deploy over a fetch hiccup. Replaces the retired refresh-data.yml.
+      - name: Refresh canonical metrics from corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          CORPUS=organvm/organvm-corpvs-testamentvm
+          tmp=$(mktemp -d)
+          fetch() { gh api "repos/$CORPUS/contents/$1" --jq '.content' 2>/dev/null | base64 -d > "$tmp/$1" 2>/dev/null; }
+          if fetch system-metrics.json && fetch registry-v2.json \
+             && python3 -c "import json; json.load(open('$tmp/system-metrics.json')); json.load(open('$tmp/registry-v2.json'))" 2>/dev/null; then
+            fetch system-snapshot.json && python3 -c "import json; json.load(open('$tmp/system-snapshot.json'))" 2>/dev/null || echo '{}' > "$tmp/system-snapshot.json"
+            python3 scripts/generate-system-data.py \
+              --metrics "$tmp/system-metrics.json" \
+              --registry "$tmp/registry-v2.json" \
+              --snapshot "$tmp/system-snapshot.json" \
+              --output-dir src/data/
+            echo "Refreshed src/data from corpus: total_repos=$(python3 -c "import json;print(json.load(open('src/data/system-metrics.json'))['computed']['total_repos'])")"
+          else
+            echo "::warning::Corpus metrics fetch failed — building with committed src/data (last-known-good)."
+          fi
 
       # --- Lint & Typecheck ---
       - name: Lint

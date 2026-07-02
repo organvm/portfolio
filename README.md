@@ -13,7 +13,7 @@
 
 ## 🔭 Overview
 
-Personal portfolio site showcasing 19 project case studies, an interactive p5.js generative hero, and a live engineering dashboard. The project is organized around the **ORGANVM** system—a polymathic framework spanning 91 repositories and 8 GitHub organizations.
+Personal portfolio site showcasing 19 project case studies, an interactive p5.js generative hero, and a live engineering dashboard. The project is organized around the **ORGANVM** system—a polymathic framework spanning 171 repositories and 8 GitHub organizations.
 
 *   **Live Hub:** [organvm.github.io/portfolio](https://organvm.github.io/portfolio/)
 *   **Architecture:** [The Eight-Organ System](https://github.com/meta-organvm)

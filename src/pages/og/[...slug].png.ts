@@ -4,6 +4,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { personas } from '../../data/personas.json';
 import { projectIndex } from '../../data/project-index';
 import { targets } from '../../data/targets.json';
+import vitals from '../../data/vitals.json';
 import { generateOGImage } from '../../utils/og-image';
 
 interface OGPage extends Record<string, unknown> {
@@ -34,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		{
 			slug: 'dashboard',
 			title: 'Dashboard',
-			subtitle: 'System metrics across 149 repositories and 8 organs',
+			subtitle: `System metrics across ${vitals.repos.total} repositories and 8 organs`,
 		},
 		{
 			slug: 'essays',
