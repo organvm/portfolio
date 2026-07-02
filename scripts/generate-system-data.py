@@ -108,19 +108,20 @@ def compute_vitals(canonical: dict, snapshot: dict | None = None) -> dict:
     ci_workflows = c.get("ci_workflows", 0)
     ci_coverage_pct = round(ci_workflows / total_repos * 100) if total_repos else 0
 
-    # We now fetch these from the top level of canonical instead of a 'manual' block.
-    # Set default minimum values if missing to ensure data-integrity.
-    auto_tests = canonical.get("automated_tests", 2000)
+    # Substance metrics derive from the corpus's live file census — never estimated.
+    # The corpus now emits computed.code_files / test_files (file_count_basis=
+    # live-public-gh-tree-api), counted from each public repo's git tree. There is no
+    # reproducible test-CASE count, so automated_tests mirrors the test-file census
+    # (surfaces relabel to "test files"). A missing value surfaces as 0 — the >0
+    # data-integrity check fails loudly — never the old total_repos*20 / 2000 stub.
+    code_files = c.get("code_files") or 0
+    test_files = c.get("test_files") or 0
+    auto_tests = c.get("test_files") or 0
     # Derive the doc word count from the live corpus total — never a hardcoded stub.
     # The corpus emits computed.total_words_numeric / documentation_words (988148,
     # word_count_basis=live-corpus-content). A missing value must surface as 0 (the
     # >0 data-integrity check fails loudly) rather than silently showing a fake ~300k.
     doc_words = c.get("total_words_numeric") or c.get("documentation_words") or 0
-
-    # code_files and test_files don't strictly exist mapped directly in the old way,
-    # we can do an estimation based on repo count and tests if they aren't provided.
-    code_files = canonical.get("code_files", total_repos * 20)
-    test_files = canonical.get("test_files", auto_tests // 5)
 
     vitals = {
         "repos": {

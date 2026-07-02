@@ -19,8 +19,8 @@ export default function tickerSketch(p: p5, container: HTMLElement) {
 		`Essay count: ${vitals.logos.essays} | ~${Math.round(vitals.logos.words / 1000)}K words`,
 		'Engagement: +23% MoM',
 		'Retention: 41% at month-6',
-		'3,586 code files across system',
-		'736 test files validated',
+		`${vitals.substance.code_files.toLocaleString()} code files across system`,
+		`${vitals.substance.test_files.toLocaleString()} test files validated`,
 		'Promotion pipeline: ACTIVE',
 		'Distribution: POSSE channels live',
 	];

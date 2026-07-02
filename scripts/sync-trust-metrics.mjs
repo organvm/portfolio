@@ -114,7 +114,11 @@ async function syncVitals() {
 			substance: {
 				code_files: c.code_files ?? existingVitals.substance?.code_files ?? 0,
 				test_files: c.test_files ?? existingVitals.substance?.test_files ?? 0,
-				automated_tests: existingVitals.substance?.automated_tests ?? 0,
+				// Derive from the live test-file census, never the preserved 2000 stub.
+				// The SSOT emits no reproducible test-CASE count, so the honest, reviewer-
+				// checkable substance metric is test files; this keeps `automated_tests`
+				// equal to it (surfaces relabel to "test files") instead of a fabrication.
+				automated_tests: c.test_files ?? existingVitals.substance?.automated_tests ?? 0,
 				ci_passing: c.ci_workflows ?? existingVitals.substance?.ci_passing ?? 0,
 				ci_coverage_pct: existingVitals.substance?.ci_coverage_pct ?? 90,
 			},
