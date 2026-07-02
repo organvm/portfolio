@@ -17,7 +17,7 @@
 			{
 				"invariant": "DEPENDENCY_REGISTRY",
 				"status": "PASS",
-				"details": "All 91 repositories resolve to canonical registry version 2.1.0."
+				"details": "All 149 repositories resolve to canonical registry version 2.1.0."
 			}
 		],
 		"signature": "blake3:7f8e9a2b1c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f"

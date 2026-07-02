@@ -3,7 +3,7 @@
 	"subtitle": "Eight-Organ Creative-Institutional System",
 	"owner": "@4444j99 / @4444J99",
 	"launch_date": "2026-02-11",
-	"system_summary": "116 repos (62 ACTIVE, 53 ARCHIVED), 104 CI/CD workflows, 741K+ total words, full provenance tracking, 100% seed.yaml coverage.",
+	"system_summary": "149 repos (93 ACTIVE, 54 ARCHIVED), 107 CI/CD workflows, 741K+ total words, full provenance tracking, 100% seed.yaml coverage.",
 	"strategic_context": "Meta-system documentation (governance, orchestration, infrastructure) strengthens applications across: (1) AI systems engineering roles at research labs, (2) Creative/technical grants (NSF, NEA, Mellon, Knight Foundation), (3) Technology residencies and fellowships. This registry demonstrates orchestration capacity, architectural reasoning, and systemic sustainability—competitive differentiators in 2026 funding landscape.",
 	"supporting_evidence": "Artists like Julian Oliver, Nicky Case, and Hundred Rabbits (Devine Lu Linvega & Rekka Bellum) treat protocols and governance structures as primary artistic output, demonstrating that small-scale sustainable creative infrastructure with extensive documentation receives institutional recognition (updated per 08-CANONICAL-ACTION-PLAN.md §7). Programs like Knight Foundation Art+Tech Expansion Fund, Processing Foundation Fellowship, Google Creative Fellowship explicitly evaluate infrastructure contribution and organizational capacity.",
 	"strategic_opportunity": "Position the eight-organ system as evidence of: (a) a living creative work where governance is the medium (art grants, residencies), (b) long-term digital capacity and sustainability (fellowships), (c) production-grade systems thinking (selective tech roles), (d) community contribution and reusable infrastructure (community-focused funding). All organs launch simultaneously to demonstrate integrated systems thinking.",
@@ -25,5 +25,5 @@
 			"description": "Processing Foundation, Google Creative — artist-engineer hybrid"
 		}
 	],
-	"generated": "2026-03-20T18:47:42.283Z"
+	"generated": "2026-07-02T15:29:29.214Z"
 }

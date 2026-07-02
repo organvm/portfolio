@@ -201,7 +201,7 @@ export const organGroups: OrganGroup[] = [
 				title: 'Orchestration Hub',
 				tagline: 'The central nervous system of eight GitHub organizations',
 				description:
-					'Machine-readable JSON registry serving as single source of truth for 91 repositories — validation scripts, governance rules, dependency graph enforcement, and promotion state machines.',
+					'Machine-readable JSON registry serving as single source of truth for 149 repositories — validation scripts, governance rules, dependency graph enforcement, and promotion state machines.',
 				slug: 'orchestration-hub',
 				tags: ['Governance', 'Systems'],
 				skills: ['Systems'],
@@ -279,7 +279,7 @@ export const organGroups: OrganGroup[] = [
 				title: 'ORGAN Corpus Testamentum',
 				tagline: 'Governance as creative infrastructure',
 				description:
-					'The orchestration system coordinating 91 repositories across 8 GitHub organizations \u2014 dependency rules, promotion state machines, automated audits, and ~386K words of documentation.',
+					'The orchestration system coordinating 149 repositories across 8 GitHub organizations \u2014 dependency rules, promotion state machines, automated audits, and ~386K words of documentation.',
 				slug: 'eight-organ-system',
 				tags: ['Systems', 'Governance'],
 				skills: ['Systems'],

@@ -55,6 +55,13 @@ def transform_for_portfolio(canonical: dict, portfolio_path: Path) -> dict:
 
     portfolio["generated"] = canonical["generated"]
 
+    # Refresh the canonical `computed` block wholesale. Downstream consumers read
+    # `computed.*` (sync-identity.mjs -> about.json; data-integrity tests), so if it
+    # is left stale the /about summary and metrics freeze even when the registry
+    # block updates — the 116-vs-149 drift. Portfolio-only computed keys are kept;
+    # canonical values win for shared keys.
+    portfolio["computed"] = {**portfolio.get("computed", {}), **c}
+
     reg = portfolio.get("registry", {})
     reg["total_repos"] = c["total_repos"]
     reg["total_organs"] = c["total_organs"]

@@ -5,32 +5,15 @@
     "orgs": 10
   },
   "substance": {
-    "code_files": 2980,
-    "test_files": 400,
+    "code_files": 23121,
+    "test_files": 4337,
     "automated_tests": 2000,
     "ci_passing": 107,
     "ci_coverage_pct": 72
   },
   "logos": {
-    "essays": 29,
-    "words": 300000
+    "essays": 49,
+    "words": 740907
   },
-  "timestamp": "2026-07-02T14:04:41.613206+00:00",
-  "organism": {
-    "density": 0.252,
-    "entities": 149,
-    "edges": 0,
-    "ammoi": "AMMOI:25% E:0 T:0 C:0 Ev24h:2 [ORGAN-VI:76%, ORGAN-VII:75%, META-ORGANVM:63%]"
-  },
-  "omega": {
-    "met": 5,
-    "total": 20
-  },
-  "promotion_pipeline": {
-    "ARCHIVED": 53,
-    "CANDIDATE": 1,
-    "GRADUATED": 59,
-    "LOCAL": 28,
-    "PUBLIC_PROCESS": 8
-  }
+  "timestamp": "2026-07-02T08:50:20.770333+00:00"
 }

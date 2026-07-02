@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-29T09:27:44.919Z",
+  "generated": "2026-07-02T15:32:17.059Z",
   "tests": {
     "total": null,
     "passed": null,
@@ -34,10 +34,10 @@
     "githubSource": null
   },
   "coverage": {
-    "statements": 91,
-    "branches": 82,
-    "functions": 87,
-    "lines": 92
+    "statements": null,
+    "branches": null,
+    "functions": null,
+    "lines": null
   },
   "lighthouse": {
     "performance": null,
@@ -96,8 +96,8 @@
     "snapshots": []
   },
   "build": {
-    "pages": 0,
-    "bundleFiles": 0
+    "pages": 104,
+    "bundleFiles": 66
   },
   "sources": {
     "tests": ".quality/vitest-report.json",
