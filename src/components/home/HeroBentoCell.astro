@@ -28,7 +28,7 @@ const sketchCount = SKETCH_NAMES.length;
 	</p>
 
 	<p class="hero-bento__subtitle" data-hero-view="engineering">
-		15 years building systems that build themselves. {vitals.repos.total} repositories, {vitals.substance.automated_tests.toLocaleString()} tests, {wordsK}K words of docs — and now I build autonomous creative systems.
+		15 years building systems that build themselves. {vitals.repos.total} repositories, {vitals.substance.test_files.toLocaleString()} test files, {wordsK}K words of docs — and now I build autonomous creative systems.
 	</p>
 	<p class="hero-bento__subtitle" data-hero-view="creative">
 		I build creative infrastructure where governance is the art — treating organizational design as an aesthetic medium.
@@ -36,7 +36,7 @@ const sketchCount = SKETCH_NAMES.length;
 
 	<div class="stat-pills" data-stats-view="engineering">
 		<StatPill value={String(vitals.repos.total)} label="Repos" />
-		<StatPill value={`${vitals.substance.automated_tests.toLocaleString()}+`} label="Tests" />
+		<StatPill value={`${vitals.substance.test_files.toLocaleString()}+`} label="Test Files" />
 		<StatPill value={`${vitals.substance.ci_coverage_pct}%`} label="Coverage" />
 		<StatPill value={String(vitals.substance.ci_passing)} label="CI Passing" />
 		<StatPill value="15" label="Years" />

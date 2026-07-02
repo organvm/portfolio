@@ -8,7 +8,7 @@ import Layout from '../layouts/Layout.astro';
 
 const impactMetrics = [
 	{ value: vitals.repos.total.toString(), label: 'Repos Managed' },
-	{ value: vitals.substance.automated_tests.toLocaleString(), label: 'Automated Tests' },
+	{ value: vitals.substance.test_files.toLocaleString(), label: 'Test Files' },
 	{ value: `${Math.round(vitals.logos.words / 1000)}K+`, label: 'Words Written' },
 	{ value: vitals.substance.ci_passing.toString(), label: 'CI Workflows Passing' },
 	{ value: `${vitals.substance.ci_coverage_pct}%`, label: 'Avg. Coverage' },

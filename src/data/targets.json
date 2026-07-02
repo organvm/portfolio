@@ -8,7 +8,7 @@
 			"channel": "Direct",
 			"persona_id": "ai-systems-engineer",
 			"keyword_focus": ["Architecture", "System Design"],
-			"intro": "Palantir builds the operating system for decisions at civilizational scale. My work on Agentic Titan — a polymorphic orchestration framework with 9 communication topologies, 22 agent archetypes, and mandatory safety sandboxing — demonstrates the exact architectural discipline required to build reliable systems where autonomous agents must operate within strict governance bounds. I've managed the end-to-end lifecycle of a 171-repository ecosystem with automated dependency validation and machine-readable promotion criteria, proving I can ship complex infrastructure at the intersection of AI autonomy and institutional trust."
+			"intro": "Palantir builds the operating system for decisions at civilizational scale. My work on Agentic Titan — a polymorphic orchestration framework with 9 communication topologies, 22 agent archetypes, and mandatory safety sandboxing — demonstrates the exact architectural discipline required to build reliable systems where autonomous agents must operate within strict governance bounds. I've managed the end-to-end lifecycle of a 170+ repository ecosystem with automated dependency validation and machine-readable promotion criteria, proving I can ship complex infrastructure at the intersection of AI autonomy and institutional trust."
 		},
 		{
 			"slug": "openai",
@@ -43,7 +43,7 @@
 			"channel": "Direct Application",
 			"persona_id": "systems-architect",
 			"keyword_focus": ["RSC", "Hexagonal Architecture", "Next.js 16", "Platform Infrastructure"],
-			"intro": "Vercel defines the modern web. My experience building 'in-midst-my-life' (Next.js 16 + RSC) and orchestrating 171 repos proves I understand the platform depth required to build tools for other developers. I specialize in the kind of high-reliability, hexagonal architecture that platform engineering demands."
+			"intro": "Vercel defines the modern web. My experience building 'in-midst-my-life' (Next.js 16 + RSC) and orchestrating 170+ repos proves I understand the platform depth required to build tools for other developers. I specialize in the kind of high-reliability, hexagonal architecture that platform engineering demands."
 		}
 	]
 }

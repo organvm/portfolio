@@ -81,8 +81,9 @@ const activeRepos =
 	(computed.implementation_status as Record<string, number>)?.ACTIVE ??
 	vitals.repos.active;
 
-const automatedTests = (typedMetrics.automated_tests as number) ?? vitals.substance.automated_tests;
-const testPackages = (typedMetrics.automated_tests_packages as number) ?? 6;
+// Test files: the reproducible substance metric (live git-tree census). The
+// per-package bars below are illustrative suite sizes, not summed into a headline.
+const testFiles = vitals.substance.test_files;
 const sprintsCompleted = community.sprints_completed;
 
 // Test distribution by package
@@ -120,7 +121,7 @@ const corpus = {
 			<StatGrid stats={[
 				{ value: `${summary.met}/${summary.total}`, label: 'Omega Criteria Met' },
 				{ value: `${soakStreak}/${soakTarget}`, label: 'Soak Test Days' },
-				{ value: automatedTests.toLocaleString(), label: 'Automated Tests' },
+				{ value: testFiles.toLocaleString(), label: 'Test Files' },
 				{ value: totalRepos, label: 'Repositories' },
 				{ value: ciCoverage, label: 'CI Workflows' },
 				{ value: `${corpus.specs}`, label: 'Governance Specs' },
@@ -228,8 +229,7 @@ const corpus = {
 		<div class="container">
 			<h2 class="section__heading" data-reveal>Test Coverage</h2>
 			<p class="validation__intro">
-				{automatedTests.toLocaleString()} automated tests across {testPackages} packages.
-				Not a prototype count — these run on every commit.
+				Test suites by package — representative core-package sizes, not a prototype count. These run on every commit.
 			</p>
 
 			<div class="test-bars" data-reveal>
