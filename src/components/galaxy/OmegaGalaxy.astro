@@ -29,9 +29,38 @@ const projects = projectCatalog.map((p) => ({
   </div>
 </div>
 
-<script>
+  <script>
   import * as THREE from 'three';
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+  interface GalaxyProject {
+    slug: string;
+    title: string;
+    organ: string;
+    summary: string;
+    tags: string[];
+    color: string;
+  }
+
+  function isGalaxyProject(value: unknown): value is GalaxyProject {
+    if (!value || typeof value !== 'object') return false;
+    const project = value as Record<string, unknown>;
+    return (
+      typeof project.slug === 'string' &&
+      typeof project.title === 'string' &&
+      typeof project.organ === 'string' &&
+      typeof project.summary === 'string' &&
+      typeof project.color === 'string' &&
+      Array.isArray(project.tags) &&
+      project.tags.every((tag) => typeof tag === 'string')
+    );
+  }
+
+  function parseGalaxyProjects(raw: string | null): GalaxyProject[] {
+    const parsed = JSON.parse(raw || '[]');
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isGalaxyProject);
+  }
 
   function createGlowTexture(color: string) {
     const canvas = document.createElement('canvas');
@@ -59,7 +88,7 @@ const projects = projectCatalog.map((p) => ({
     const canvas = document.getElementById('omega-galaxy-canvas') as HTMLCanvasElement;
     if (!container || !canvas) return;
 
-    const projects = JSON.parse(container.dataset.projects || '[]');
+    const projects = parseGalaxyProjects(container.dataset.projects);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const controller = new AbortController();
     let rafId = 0;
@@ -90,9 +119,9 @@ const projects = projectCatalog.map((p) => ({
     const starGeometry = new THREE.SphereGeometry(2, 16, 16);
 
     // Position Logic: Distribute organs in a spiral/spherical volume
-    const organKeys = [...new Set(projects.map((p: any) => p.organ))];
+    const organKeys = [...new Set(projects.map((p) => p.organ))];
 
-    projects.forEach((project: any) => {
+    projects.forEach((project) => {
       const organIndex = organKeys.indexOf(project.organ);
       const organAngle = (organIndex / organKeys.length) * Math.PI * 2;
       const organRadius = 150 + Math.random() * 50;
@@ -158,8 +187,8 @@ const projects = projectCatalog.map((p) => ({
       const intersects = raycaster.intersectObjects(starObjects);
 
       if (intersects.length > 0) {
-        const project = intersects[0].object.userData;
-        showRepoInfo(project);
+      const project = intersects[0].object.userData as GalaxyProject;
+      showRepoInfo(project);
         
         // Animate camera to star
         const targetPos = intersects[0].object.position.clone();
@@ -173,7 +202,7 @@ const projects = projectCatalog.map((p) => ({
       }
     }
 
-    function showRepoInfo(project: any) {
+    function showRepoInfo(project: GalaxyProject) {
       if (!infoCard || !repoTitle || !repoOrgan || !repoSummary || !repoTags || !repoLink) return;
       
       repoTitle.textContent = project.title;
@@ -394,4 +423,3 @@ const projects = projectCatalog.map((p) => ({
     color: var(--text-muted);
   }
 </style>
-
