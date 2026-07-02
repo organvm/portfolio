@@ -26,7 +26,7 @@ function normalizeBasePath(value) {
 	const trimmed = value.trim();
 	if (trimmed && !trimmed.startsWith('/')) return '';
 	if (trimmed.length > 1 && trimmed.endsWith('/')) return trimmed.slice(0, -1);
-	return trimmed === '/' ? '' : (trimmed || '');
+	return trimmed === '/' ? '' : trimmed || '';
 }
 
 function normalizeRoutePath(value) {

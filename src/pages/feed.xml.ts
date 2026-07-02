@@ -11,7 +11,9 @@ interface EssayItem {
 }
 
 export function GET(context: APIContext) {
-	const siteBase = context.site ? context.site.toString().replace(/\/$/, '') + '/' : 'https://4444j99.dev/';
+	const siteBase = context.site
+		? context.site.toString().replace(/\/$/, '') + '/'
+		: 'https://4444j99.dev/';
 	const fallbackProjectDate = new Date('2026-02-10T00:00:00.000Z');
 	const indexSlugs = new Set(projectIndex.map((p) => p.slug));
 
