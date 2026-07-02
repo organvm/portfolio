@@ -52,7 +52,7 @@ describe('check-runtime-route-manifest', () => {
 			manifestPath,
 			JSON.stringify(
 				{
-					basePath: '/portfolio',
+					basePath: '',
 					routes: [{ path: '/' }],
 				},
 				null,
@@ -78,7 +78,7 @@ describe('check-runtime-route-manifest', () => {
 			manifestPath,
 			JSON.stringify(
 				{
-					basePath: '/portfolio',
+					basePath: '',
 					routes: [{ path: '/' }, { path: '/about' }],
 				},
 				null,

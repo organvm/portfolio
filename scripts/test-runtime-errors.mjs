@@ -22,11 +22,11 @@ const viewportProfiles = [
 ];
 
 function normalizeBasePath(value) {
-	if (typeof value !== 'string') return '/portfolio';
+	if (typeof value !== 'string') return '';
 	const trimmed = value.trim();
-	if (!trimmed.startsWith('/')) return '/portfolio';
+	if (trimmed && !trimmed.startsWith('/')) return '';
 	if (trimmed.length > 1 && trimmed.endsWith('/')) return trimmed.slice(0, -1);
-	return trimmed || '/portfolio';
+	return trimmed === '/' ? '' : trimmed || '';
 }
 
 function normalizeRoutePath(value) {

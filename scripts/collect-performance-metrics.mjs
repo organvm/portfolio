@@ -10,7 +10,7 @@ import { parseOption } from './lib/cli-utils.mjs';
 const DIST = resolve('dist');
 const ASTRO_DIR = resolve('dist/_astro');
 const OUTPUT_PATH = resolve(parseOption('json-out', '.quality/perf-summary.json'));
-const BASE_PATH = '/portfolio';
+const BASE_PATH = '';
 const PREVIEW_HOST = '127.0.0.1';
 const PREVIEW_PORT = 4321;
 const PREVIEW_URL = `http://${PREVIEW_HOST}:${PREVIEW_PORT}`;

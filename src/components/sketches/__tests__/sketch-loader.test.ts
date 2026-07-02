@@ -413,7 +413,7 @@ describe('sketch-loader runtime', () => {
 	it('skips background init on deferred routes', async () => {
 		// Set location to a deferred route
 		Object.defineProperty(window, 'location', {
-			value: { ...window.location, pathname: '/portfolio/architecture' },
+			value: { ...window.location, pathname: '/architecture' },
 			writable: true,
 			configurable: true,
 		});
@@ -708,7 +708,7 @@ describe('sketch-loader runtime', () => {
 	it('normalizePath handles root and trailing slashes', async () => {
 		// Test shouldBootBackground with trailing slash route
 		Object.defineProperty(window, 'location', {
-			value: { ...window.location, pathname: '/portfolio/architecture/' },
+			value: { ...window.location, pathname: '/architecture/' },
 			writable: true,
 			configurable: true,
 		});

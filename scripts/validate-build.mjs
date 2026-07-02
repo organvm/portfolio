@@ -11,7 +11,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const DIST = resolve('dist');
-const SITE_BASE = 'https://organvm.github.io/portfolio/';
+const SITE_BASE = 'https://4444j99.dev/';
 let exitCode = 0;
 
 if (!existsSync(DIST)) {
@@ -91,9 +91,7 @@ for (const file of htmlFiles) {
 		totalLinks++;
 
 		let resolved;
-		if (href.startsWith('/portfolio/')) {
-			resolved = href.replace('/portfolio/', '');
-		} else if (href.startsWith('/')) {
+		if (href.startsWith('/')) {
 			resolved = href.slice(1);
 		} else {
 			resolved = relDir + href;

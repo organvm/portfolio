@@ -1,5 +1,5 @@
 {
-  "basePath": "/portfolio",
+  "basePath": "",
   "routes": [
     {
       "path": "/404.html",

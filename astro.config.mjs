@@ -8,8 +8,8 @@ import rehypeShibuiLens from './plugins/rehype-shibui-lens.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://organvm.github.io',
-	base: '/portfolio',
+	site: 'https://4444j99.dev',
+	base: '/',
 	// Keep navigation transitions but avoid eager cross-route prefetch bursts on heavy pages.
 	prefetch: false,
 	markdown: {

@@ -13,7 +13,7 @@
 
 import { mkdirSync, writeFileSync } from 'fs';
 
-const BASE_URL = 'https://organvm.github.io/portfolio';
+const BASE_URL = 'https://4444j99.dev';
 const PSI_API = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
 const API_KEY = process.env.PSI_API_KEY || ''; // allow-secret
 

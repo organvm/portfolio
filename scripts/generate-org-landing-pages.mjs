@@ -67,12 +67,12 @@ const ORGANS = {
 const HUB_LINKS = [
 	{
 		label: 'Portfolio',
-		url: 'https://organvm.github.io/portfolio/',
+		url: 'https://4444j99.dev/',
 		desc: 'Main portfolio hub',
 	},
 	{
 		label: 'System Directory',
-		url: 'https://organvm.github.io/portfolio/directory/',
+		url: 'https://4444j99.dev/directory/',
 		desc: 'All 92 sites indexed',
 	},
 	{
@@ -182,10 +182,10 @@ ${hubLinks}
     <main>
         <header>
             <h1>${escapeHtml(organ.fullName)}</h1>
-            <p>Part of the <a href="https://organvm.github.io/portfolio/directory/" style="color:var(--primary);text-decoration:none;font-weight:600">ORGANVM eight-organ system</a></p>
+            <p>Part of the <a href="https://4444j99.dev/directory/" style="color:var(--primary);text-decoration:none;font-weight:600">ORGANVM eight-organ system</a></p>
         </header>
         <div class="hub-banner">
-            Explore the full system: <a href="https://organvm.github.io/portfolio/">Portfolio</a> · <a href="https://organvm.github.io/portfolio/directory/">Directory</a> · <a href="https://organvm-v-logos.github.io/public-process/">49 Essays</a>
+            Explore the full system: <a href="https://4444j99.dev/">Portfolio</a> · <a href="https://4444j99.dev/directory/">Directory</a> · <a href="https://organvm-v-logos.github.io/public-process/">49 Essays</a>
         </div>
         <p class="count">${repos.length} repositories with GitHub Pages</p>
         <div class="repo-grid">

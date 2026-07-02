@@ -28,6 +28,6 @@ Five functions grounded in linguistic theory:
 
 Your portfolio shouldn't require a CS degree to evaluate. Build systems that adapt to readers—not the other way around.
 
-Try it: https://4444j99.github.io/portfolio/
+Try it: https://4444j99.dev/
 
 What's your depth?

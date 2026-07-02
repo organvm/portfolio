@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://4444j99.github.io/portfolio/sitemap-index.xml
-Feed: https://4444j99.github.io/portfolio/feed.xml
+Sitemap: https://4444j99.dev/sitemap-index.xml
+Feed: https://4444j99.dev/feed.xml

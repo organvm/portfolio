@@ -166,7 +166,7 @@ export async function generateOGImage(destPath, title, subtitle, accentColor = '
 								{
 									type: 'div',
 									props: {
-										children: 'organvm.github.io/portfolio',
+										children: '4444j99.dev',
 									},
 								},
 								{
