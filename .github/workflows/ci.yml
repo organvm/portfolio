@@ -94,6 +94,10 @@ jobs:
         run: npm run sync:a11y-routes && npm run check:runtime-route-manifest
 
       # --- Test ---
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: E2E Smoke Tests
+        run: npm run test:e2e:smoke
       - name: Unit Tests
         run: npm run test:coverage
       - name: Package Fixture Tests
