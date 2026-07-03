@@ -83,6 +83,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: npm run sync:github-pages
+      - name: Validate GitHub Pages data
+        run: npm run validate:github-pages
       - name: Build
         run: npm run build
         env:
