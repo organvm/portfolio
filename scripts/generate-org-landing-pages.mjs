@@ -21,6 +21,37 @@ import { resolve } from 'node:path';
 const PAGES_JSON = resolve('src/data/github-pages.json');
 const OUTPUT_DIR = resolve('dist-org-pages');
 
+// Essay count is DERIVED from the SSOT (corpus published_essays, computed live
+// from the logos _posts), never pinned. Live corpus first, local metrics next,
+// then an un-numbered "Essays" label — never a stale literal.
+const CORPUS_METRICS_URL =
+	'https://raw.githubusercontent.com/organvm/organvm-corpvs-testamentvm/main/system-metrics.json';
+const LOCAL_METRICS = resolve('src/data/system-metrics.json');
+
+async function deriveEssayCount() {
+	try {
+		const r = await fetch(CORPUS_METRICS_URL, { signal: AbortSignal.timeout(15000) });
+		if (r.ok) {
+			const n = (await r.json())?.computed?.published_essays;
+			if (Number.isInteger(n) && n > 0) return n;
+		}
+	} catch {
+		/* fall through to local */
+	}
+	try {
+		const j = JSON.parse(readFileSync(LOCAL_METRICS, 'utf-8'));
+		const n = j?.computed?.published_essays ?? j?.essays?.total;
+		if (Number.isInteger(n) && n > 0) return n;
+	} catch {
+		/* fall through to un-numbered label */
+	}
+	return null;
+}
+
+const ESSAYS = await deriveEssayCount();
+const essaysLabel = ESSAYS ? `${ESSAYS} Essays` : 'Essays';
+const essaysDesc = ESSAYS ? `${ESSAYS} published essays` : 'Published essays';
+
 const ORGANS = {
 	'organvm-i-theoria': {
 		name: 'I · Theoria',
@@ -83,7 +114,7 @@ const HUB_LINKS = [
 	{
 		label: 'Essays',
 		url: 'https://organvm-v-logos.github.io/public-process/',
-		desc: '49 published essays',
+		desc: essaysDesc,
 	},
 ];
 
@@ -185,7 +216,7 @@ ${hubLinks}
             <p>Part of the <a href="https://organvm.github.io/portfolio/directory/" style="color:var(--primary);text-decoration:none;font-weight:600">ORGANVM eight-organ system</a></p>
         </header>
         <div class="hub-banner">
-            Explore the full system: <a href="https://organvm.github.io/portfolio/">Portfolio</a> · <a href="https://organvm.github.io/portfolio/directory/">Directory</a> · <a href="https://organvm-v-logos.github.io/public-process/">49 Essays</a>
+            Explore the full system: <a href="https://organvm.github.io/portfolio/">Portfolio</a> · <a href="https://organvm.github.io/portfolio/directory/">Directory</a> · <a href="https://organvm-v-logos.github.io/public-process/">${essaysLabel}</a>
         </div>
         <p class="count">${repos.length} repositories with GitHub Pages</p>
         <div class="repo-grid">
