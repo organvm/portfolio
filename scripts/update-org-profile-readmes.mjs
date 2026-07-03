@@ -76,7 +76,7 @@ const HUB_FOOTER = [
 	'',
 	'**Explore the System**',
 	'',
-	`[Portfolio](https://organvm.github.io/portfolio/) · [System Directory](https://organvm.github.io/portfolio/directory/) · [${essaysLabel}](https://organvm-v-logos.github.io/public-process/) · [Knowledge Base](https://organvm-i-theoria.github.io/my-knowledge-base/) · [Consult](https://organvm.github.io/portfolio/consult/)`,
+	`[Portfolio](https://organvm.github.io/portfolio/) · [System Directory](https://organvm.github.io/portfolio/directory/) · [${essaysLabel}](https://organvm.github.io/public-process/) · [Knowledge Base](https://organvm.github.io/portfolio/projects/knowledge-base/) · [Consult](https://organvm.github.io/portfolio/consult/)`,
 	'',
 	'</div>',
 	'<!-- PORTFOLIO-HUB-END -->',
