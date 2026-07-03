@@ -37,7 +37,14 @@ const ORGS = [
 // stale literal. This is the fix for the 29/40/49/65 divergence across surfaces.
 const CORPUS_METRICS_URL =
 	'https://raw.githubusercontent.com/organvm/organvm-corpvs-testamentvm/main/system-metrics.json';
-const LOCAL_METRICS = resolve(WORKSPACE, 'organvm', 'portfolio', 'src', 'data', 'system-metrics.json');
+const LOCAL_METRICS = resolve(
+	WORKSPACE,
+	'organvm',
+	'portfolio',
+	'src',
+	'data',
+	'system-metrics.json',
+);
 
 async function deriveEssayCount() {
 	try {
