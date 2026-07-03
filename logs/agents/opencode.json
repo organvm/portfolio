@@ -1,0 +1,11 @@
+{
+  "agent": "opencode",
+  "status": "idle",
+  "accepting_tasks": true,
+  "available_tokens": 17110304,
+  "available_pct": 34.2,
+  "current_task_id": "GEN-organvm-portfolio-ci-green-0702",
+  "heartbeat": "2026-07-03T11:29:16.963629+00:00",
+  "token_usage_pct": 65.78,
+  "clock_health": "throttle"
+}
