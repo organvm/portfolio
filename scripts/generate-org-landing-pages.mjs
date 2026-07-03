@@ -108,12 +108,12 @@ const HUB_LINKS = [
 	},
 	{
 		label: 'Knowledge Base',
-		url: 'https://organvm-i-theoria.github.io/my-knowledge-base/',
+		url: 'https://organvm.github.io/portfolio/projects/knowledge-base/',
 		desc: 'Research library',
 	},
 	{
 		label: 'Essays',
-		url: 'https://organvm-v-logos.github.io/public-process/',
+		url: 'https://organvm.github.io/public-process/',
 		desc: essaysDesc,
 	},
 ];
@@ -216,7 +216,7 @@ ${hubLinks}
             <p>Part of the <a href="https://organvm.github.io/portfolio/directory/" style="color:var(--primary);text-decoration:none;font-weight:600">ORGANVM eight-organ system</a></p>
         </header>
         <div class="hub-banner">
-            Explore the full system: <a href="https://organvm.github.io/portfolio/">Portfolio</a> · <a href="https://organvm.github.io/portfolio/directory/">Directory</a> · <a href="https://organvm-v-logos.github.io/public-process/">${essaysLabel}</a>
+            Explore the full system: <a href="https://organvm.github.io/portfolio/">Portfolio</a> · <a href="https://organvm.github.io/portfolio/directory/">Directory</a> · <a href="https://organvm.github.io/public-process/">${essaysLabel}</a>
         </div>
         <p class="count">${repos.length} repositories with GitHub Pages</p>
         <div class="repo-grid">
