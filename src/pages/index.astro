@@ -5,6 +5,7 @@ import ControlsBentoCell from '../components/home/ControlsBentoCell.astro';
 import CTABentoCell from '../components/home/CTABentoCell.astro';
 import FeaturedBentoCard from '../components/home/FeaturedBentoCard.astro';
 import HeroBentoCell from '../components/home/HeroBentoCell.astro';
+import LaurelsBentoCell from '../components/home/LaurelsBentoCell.astro';
 import PersonaBentoCell from '../components/home/PersonaBentoCell.astro';
 import { organColorMap } from '../data/organ-colors';
 import { featuredNumbers, organGroups } from '../data/organ-groups';
@@ -63,6 +64,7 @@ const nonFeatured = allProjects.filter((p) => !featuredNumbers.has(p.number)).sl
 			<span class="bento-card__title">See all {allProjects.length} projects &rarr;</span>
 		</a>
 		<PersonaBentoCell />
+		<LaurelsBentoCell />
 		<CTABentoCell />
 	</BentoGrid>
 </Layout>
