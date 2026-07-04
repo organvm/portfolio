@@ -64,6 +64,8 @@ const durationMs = Number.isFinite(stats.duration) ? stats.duration : null;
 
 const failures = [];
 if (result.status !== 0) failures.push(`playwright exit code ${result.status}`);
+if (report === null) failures.push(`playwright report missing at ${reportPath}`);
+if (expected <= 0) failures.push('no smoke tests reported');
 if (unexpected > 0) failures.push(`unexpected failures ${unexpected}`);
 if (flaky > 0) failures.push(`flaky tests ${flaky}`);
 

@@ -7,7 +7,7 @@ export default defineConfig({
 	workers: 1,
 	retries: 0,
 	timeout: 60000,
-	reporter: [['line'], ['json', { outputFile: '.quality/e2e-smoke-report.json' }]],
+	reporter: [['line'], ['json', { outputFile: '../.quality/e2e-smoke-report.json' }]],
 	use: {
 		baseURL: 'http://127.0.0.1:4173/portfolio/',
 		headless: true,
