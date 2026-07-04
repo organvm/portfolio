@@ -1,0 +1,70 @@
+---
+// src/components/home/LaurelsBentoCell.astro
+// Computed laurels cell (full width): live SVG from the LAVREA engine
+// (github.com/4444J99/laurea), recomputed daily in CI from the GitHub
+// API against cited baselines — the image updates without a site build.
+---
+
+<div class="bento-cell bento-cell--span-full laurels-cell">
+	<span class="laurels-cell__label">Computed laurels</span>
+	<a href="https://github.com/4444J99/laurea" class="laurels-cell__frame">
+		<img
+			src="https://raw.githubusercontent.com/4444J99/laurea/main/assets/cards/hero.svg"
+			alt="Computed laurels — top 1% Python full-stack engineer, recomputed daily from live GitHub data"
+			width="800"
+			height="240"
+			loading="lazy"
+		/>
+	</a>
+	<p class="laurels-cell__caption">
+		Not a bio line — an instrument. Every placement is recomputed daily from the live
+		GitHub API; every percentile is a conservative floor with a cited baseline.
+		<a href="https://github.com/4444J99/laurea/blob/main/METHODOLOGY.md">Methodology</a> ·
+		<a href="https://github.com/4444J99/laurea/blob/main/assets/SUPERLATIVES.md">Full report</a>
+	</p>
+</div>
+
+<style>
+	.laurels-cell {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.laurels-cell__label {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--text-muted);
+		margin-bottom: var(--space-sm);
+		align-self: flex-start;
+	}
+
+	.laurels-cell__frame {
+		display: block;
+		max-width: 800px;
+		width: 100%;
+	}
+
+	.laurels-cell__frame img {
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-sm);
+	}
+
+	.laurels-cell__caption {
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		max-width: 800px;
+		margin-top: var(--space-sm);
+	}
+
+	.laurels-cell__caption a {
+		color: var(--text-secondary);
+	}
+
+	.laurels-cell__caption a:hover {
+		color: var(--accent);
+	}
+</style>
