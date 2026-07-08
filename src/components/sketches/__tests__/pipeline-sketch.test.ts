@@ -71,6 +71,10 @@ function createMockP5(width: number, height: number) {
 	return { p, textCalls, circleCalls };
 }
 
+function mountPipelineSketch(p: Record<string, any>, container: HTMLElement) {
+	pipelineSketch(p as unknown as Parameters<typeof pipelineSketch>[0], container);
+}
+
 function collectTextStrings(textCalls: any[]): string[] {
 	return textCalls
 		.map((call) => call[0])
@@ -94,7 +98,7 @@ describe('pipelineSketch', () => {
 		const container = createContainer(920, 260);
 		const { p, textCalls } = createMockP5(920, 260);
 
-		pipelineSketch(p, container);
+		mountPipelineSketch(p, container);
 		p.setup();
 		p.draw();
 
@@ -117,7 +121,7 @@ describe('pipelineSketch', () => {
 		container.dataset.counts = '14,9,4,3';
 		const { p, textCalls } = createMockP5(1000, 240);
 
-		pipelineSketch(p, container);
+		mountPipelineSketch(p, container);
 		p.setup();
 
 		p.mouseX = 375;
@@ -138,7 +142,7 @@ describe('pipelineSketch', () => {
 		const { p, textCalls, circleCalls } = createMockP5(920, 220);
 
 		const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.99);
-		pipelineSketch(p, container);
+		mountPipelineSketch(p, container);
 		p.setup();
 
 		let sediment: CircleCall | null = null;
@@ -169,7 +173,7 @@ describe('pipelineSketch', () => {
 		const container = createContainer(900, 210);
 		const { p } = createMockP5(900, 210);
 
-		pipelineSketch(p, container);
+		mountPipelineSketch(p, container);
 		p.setup();
 
 		Object.defineProperty(container, 'clientWidth', {
