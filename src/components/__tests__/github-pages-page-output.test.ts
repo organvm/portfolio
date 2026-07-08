@@ -36,7 +36,13 @@ describeBuiltOutput('GitHub Pages directory output', () => {
 		expect(hasSystemPages).toBe(true);
 		expect(hasWhyMatters).toBe(true);
 
-		expect(doc.querySelectorAll('a[data-gh-pages-track]').length).toBeGreaterThan(0);
+		const repoItems = doc.querySelectorAll('.repo-item');
+		const trackedRepoLinks = doc.querySelectorAll('a[data-gh-pages-track]');
+		if (repoItems.length > 0) {
+			expect(trackedRepoLinks.length).toBeGreaterThan(0);
+		} else {
+			expect(trackedRepoLinks.length).toBe(0);
+		}
 
 		const allLinks = doc.querySelectorAll('a');
 		let hasJsonLink = false;

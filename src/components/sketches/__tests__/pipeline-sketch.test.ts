@@ -45,6 +45,7 @@ function createMockP5(width: number, height: number) {
 		noErase: vi.fn(),
 		rect: vi.fn(),
 		line: vi.fn(),
+		triangle: vi.fn(),
 		fill: vi.fn(),
 		noStroke: vi.fn(),
 		textFont: vi.fn(),
