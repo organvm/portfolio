@@ -56,9 +56,7 @@ function createMockP5(width: number, height: number) {
 		circle: vi.fn((x: number, y: number, d: number) => {
 			circleCalls.push({ x, y, d });
 		}),
-		dist: vi.fn((x1: number, y1: number, x2: number, y2: number) =>
-			Math.hypot(x1 - x2, y1 - y2),
-		),
+		dist: vi.fn((x1: number, y1: number, x2: number, y2: number) => Math.hypot(x1 - x2, y1 - y2)),
 		resizeCanvas: vi.fn((w: number, h: number) => {
 			p.width = w;
 			p.height = h;
