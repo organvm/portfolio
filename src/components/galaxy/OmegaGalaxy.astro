@@ -167,7 +167,7 @@ const projects = projectCatalog.map((p) => ({
       const intersects = raycaster.intersectObjects(starObjects);
 
       if (intersects.length > 0) {
-        const project = intersects[0].object.userData;
+        const project = intersects[0].object.userData as GalaxyProject;
         showRepoInfo(project);
         
         // Animate camera to star
@@ -403,4 +403,3 @@ const projects = projectCatalog.map((p) => ({
     color: var(--text-muted);
   }
 </style>
-
