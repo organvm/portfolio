@@ -1,4 +1,4 @@
-import { ALLOWED_ATTRS, ALLOWED_TAGS, escapeHtml, sanitizeHtml } from '../../lib/html-sanitize';
+import { escapeHtml, sanitizeHtml } from '../../../lib/html-sanitize';
 
 interface Env {
 	AI?: Ai;
