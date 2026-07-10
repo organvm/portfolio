@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 
 const PREVIEW_HOST = 'localhost';
 const PREVIEW_PORT = 4321;
-const PREVIEW_URL = `http://${PREVIEW_HOST}:${PREVIEW_PORT}/portfolio/`;
+const PREVIEW_URL = `http://${PREVIEW_HOST}:${PREVIEW_PORT}/`;
 
 async function isServerRunning(url) {
 	try {

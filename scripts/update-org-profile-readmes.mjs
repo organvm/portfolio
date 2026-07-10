@@ -31,6 +31,43 @@ const ORGS = [
 	'meta-organvm',
 ];
 
+// The essay count is DERIVED from the SSOT (the corpus computes published_essays
+// live from the logos _posts), never pinned. Prefer the live corpus metrics; fall
+// back to the local portfolio metrics; finally drop the number rather than stamp a
+// stale literal. This is the fix for the 29/40/49/65 divergence across surfaces.
+const CORPUS_METRICS_URL =
+	'https://raw.githubusercontent.com/organvm/organvm-corpvs-testamentvm/main/system-metrics.json';
+const LOCAL_METRICS = resolve(
+	WORKSPACE,
+	'organvm',
+	'portfolio',
+	'src',
+	'data',
+	'system-metrics.json',
+);
+
+async function deriveEssayCount() {
+	try {
+		const r = await fetch(CORPUS_METRICS_URL, { signal: AbortSignal.timeout(15000) });
+		if (r.ok) {
+			const n = (await r.json())?.computed?.published_essays;
+			if (Number.isInteger(n) && n > 0) return n;
+		}
+	} catch {
+		/* fall through to local */
+	}
+	try {
+		const j = JSON.parse(readFileSync(LOCAL_METRICS, 'utf-8'));
+		const n = j?.computed?.published_essays ?? j?.essays?.total;
+		if (Number.isInteger(n) && n > 0) return n;
+	} catch {
+		/* fall through to un-numbered label */
+	}
+	return null;
+}
+
+const ESSAYS = await deriveEssayCount();
+const essaysLabel = ESSAYS ? `${ESSAYS} Essays` : 'Essays';
 const HUB_FOOTER = [
 	'<!-- PORTFOLIO-HUB-START -->',
 	'---',
@@ -39,7 +76,7 @@ const HUB_FOOTER = [
 	'',
 	'**Explore the System**',
 	'',
-	'[Portfolio](https://4444j99.dev/) · [System Directory](https://4444j99.dev/directory/) · [49 Essays](https://organvm-v-logos.github.io/public-process/) · [Knowledge Base](https://organvm-i-theoria.github.io/my-knowledge-base/) · [Consult](https://4444j99.dev/consult/)',
+	`[Portfolio](https://4444j99.dev/) · [System Directory](https://4444j99.dev/directory/) · [${essaysLabel}](https://organvm.github.io/public-process/) · [Knowledge Base](https://4444j99.dev/projects/knowledge-base/) · [Consult](https://4444j99.dev/consult/)`,
 	'',
 	'</div>',
 	'<!-- PORTFOLIO-HUB-END -->',

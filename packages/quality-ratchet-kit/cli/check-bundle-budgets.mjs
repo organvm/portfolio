@@ -51,34 +51,34 @@ function selectRouteThresholds(referenceTime) {
 		{
 			date: '2026-02-17',
 			thresholds: {
-				'/portfolio/about': 15 * 1024,
-				'/portfolio/resume': 15 * 1024,
-				'/portfolio/consult': 24 * 1024,
-				'/portfolio/dashboard': 18 * 1024,
-				'/portfolio/architecture': 18 * 1024,
-				'/portfolio/gallery': 17 * 1024,
+				'/about': 15 * 1024,
+				'/resume': 15 * 1024,
+				'/consult': 24 * 1024,
+				'/dashboard': 18 * 1024,
+				'/architecture': 18 * 1024,
+				'/gallery': 17 * 1024,
 			},
 		},
 		{
 			date: '2026-03-07',
 			thresholds: {
-				'/portfolio/about': 15 * 1024,
-				'/portfolio/resume': 15 * 1024,
-				'/portfolio/consult': 24 * 1024,
-				'/portfolio/dashboard': 18 * 1024,
-				'/portfolio/architecture': 20 * 1024,
-				'/portfolio/gallery': 17 * 1024,
+				'/about': 15 * 1024,
+				'/resume': 15 * 1024,
+				'/consult': 24 * 1024,
+				'/dashboard': 18 * 1024,
+				'/architecture': 20 * 1024,
+				'/gallery': 17 * 1024,
 			},
 		},
 		{
 			date: '2026-04-01',
 			thresholds: {
-				'/portfolio/about': 14 * 1024,
-				'/portfolio/resume': 14 * 1024,
-				'/portfolio/consult': 22 * 1024,
-				'/portfolio/dashboard': 17 * 1024,
-				'/portfolio/architecture': 18 * 1024,
-				'/portfolio/gallery': 16 * 1024,
+				'/about': 14 * 1024,
+				'/resume': 14 * 1024,
+				'/consult': 22 * 1024,
+				'/dashboard': 17 * 1024,
+				'/architecture': 18 * 1024,
+				'/gallery': 16 * 1024,
 			},
 		},
 	];
@@ -93,22 +93,22 @@ function selectInteractionThresholds(referenceTime) {
 		{
 			date: '2026-02-17',
 			thresholds: {
-				'/portfolio/architecture': 1008 * 1024,
-				'/portfolio/gallery': 1010 * 1024,
+				'/architecture': 1008 * 1024,
+				'/gallery': 1010 * 1024,
 			},
 		},
 		{
 			date: '2026-03-07',
 			thresholds: {
-				'/portfolio/architecture': 1050 * 1024,
-				'/portfolio/gallery': 1060 * 1024,
+				'/architecture': 1050 * 1024,
+				'/gallery': 1060 * 1024,
 			},
 		},
 		{
 			date: '2026-04-01',
 			thresholds: {
-				'/portfolio/architecture': 960 * 1024,
-				'/portfolio/gallery': 980 * 1024,
+				'/architecture': 960 * 1024,
+				'/gallery': 980 * 1024,
 			},
 		},
 	];

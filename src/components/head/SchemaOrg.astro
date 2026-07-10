@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { description, ogImage, project } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, 'https://organvm.github.io').href;
+const canonicalURL = new URL(Astro.url.pathname, canonicalBase).href;
 
 const jsonLd = project
 	? {

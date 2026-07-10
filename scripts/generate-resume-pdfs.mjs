@@ -11,7 +11,7 @@ const targetsPath = path.join(__dirname, '../src/data/targets.json');
 const targets = JSON.parse(fs.readFileSync(targetsPath, 'utf8')).targets;
 
 const OUTPUT_DIR = path.join(__dirname, '../public/resume');
-const BASE_URL = 'http://localhost:4321/portfolio';
+const BASE_URL = 'http://localhost:4321';
 
 async function generatePDFs() {
 	console.log('🚀 Starting Colossal Concurrent PDF Generation Factory...');
