@@ -1,0 +1,11 @@
+{
+  "agent": "opencode",
+  "status": "idle",
+  "accepting_tasks": true,
+  "available_tokens": 10165348,
+  "available_pct": 20.3,
+  "current_task_id": "HEAL-rebase-organvm-portfolio-146",
+  "heartbeat": "2026-07-12T12:20:38.887126+00:00",
+  "token_usage_pct": 79.67,
+  "clock_health": "throttle"
+}
