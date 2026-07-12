@@ -1,4 +1,6 @@
 ---
+type SketchDataAttributeValue = string | number | boolean;
+
 interface Props {
 	sketchId: string;
 	height?: string;
@@ -8,7 +10,7 @@ interface Props {
 	title?: string;
 	caption?: string;
 	dataSource?: string;
-	[key: string]: unknown;
+	[key: `data-${string}`]: SketchDataAttributeValue;
 }
 
 const {
@@ -22,7 +24,16 @@ const {
 	dataSource,
 	...rest
 } = Astro.props;
-const dataAttrs = Object.fromEntries(Object.entries(rest).filter(([k]) => k.startsWith('data-')));
+
+const dataAttrs = Object.entries(rest).reduce<Record<string, SketchDataAttributeValue>>(
+	(acc, [key, value]) => {
+		if (key.startsWith('data-')) {
+			acc[key] = value as SketchDataAttributeValue;
+		}
+		return acc;
+	},
+	{},
+);
 ---
 
 <figure class="sketch-wrapper">

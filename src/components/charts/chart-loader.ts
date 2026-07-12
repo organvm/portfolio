@@ -1,3 +1,5 @@
+type ChartPayload = Record<string, unknown> | unknown[];
+
 const chartModules = {
 	'organ-bar': () => import('./organ-bar-chart'),
 	'classification-donut': () => import('./classification-donut-chart'),
@@ -7,7 +9,7 @@ const chartModules = {
 	'praxis-sparklines': () => import('./praxis-sparklines-chart'),
 	'flagship-stacked': () => import('./flagship-stacked-chart'),
 	'organ-navigator': () => import('./organ-navigator-chart'),
-} as const;
+};
 
 type ChartId = keyof typeof chartModules;
 
@@ -23,16 +25,20 @@ function isChartId(value: string): value is ChartId {
 	return value in chartModules;
 }
 
-function parseChartPayload(raw: string | undefined, chartId: string): unknown {
+function parseChartPayload(raw: string | undefined, chartId: string): ChartPayload {
 	try {
-		return JSON.parse(raw ?? '{}') as unknown;
+		const parsed = JSON.parse(raw ?? '{}');
+		if (Array.isArray(parsed) || (parsed !== null && typeof parsed === 'object')) {
+			return parsed;
+		}
+		return {};
 	} catch (err) {
 		console.error('[chart]', chartId, 'invalid chart payload:', err);
 		return {};
 	}
 }
 
-function readChartData(container: HTMLElement, chartId: string): unknown {
+function readChartData(container: HTMLElement, chartId: string): ChartPayload {
 	const dataEl = container.querySelector('script[type="application/json"]');
 	if (dataEl) {
 		return parseChartPayload(dataEl.textContent ?? '{}', chartId);
@@ -52,8 +58,7 @@ function initChart(container: HTMLElement) {
 
 	chartModules[chartId]()
 		.then((mod) => {
-			const init = mod.default as (host: HTMLElement, payload: unknown) => void;
-			init(container, data);
+			(mod.default as (host: HTMLElement, payload: unknown) => void)(container, data);
 		})
 		.catch((err) => {
 			console.error('[chart]', chartId, 'load error:', err);
