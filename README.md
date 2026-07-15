@@ -131,6 +131,7 @@ npm run test:runtime:errors  # Runtime error telemetry
 # Workspace packages (Node built-in test runner, not Vitest):
 npm run test:github-pages-core
 npm run test:quality-ratchet-kit
+npm run test:shibui-rhetoric
 npm run test:sketches
 ```
 

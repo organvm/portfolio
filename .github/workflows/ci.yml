@@ -104,6 +104,8 @@ jobs:
         run: npm run test:github-pages-core
       - name: Quality Ratchet Kit Tests
         run: npm run test:quality-ratchet-kit
+      - name: Shibui Rhetoric Tests
+        run: npm run test:shibui-rhetoric
       - name: Sketch Package Tests
         run: npm run test:sketches
       - name: Validate Build
