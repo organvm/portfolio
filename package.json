@@ -20,6 +20,7 @@
 		"check:github-pages-core": "node scripts/check-github-pages-core-drift.mjs",
 		"test:github-pages-core": "node --test packages/github-pages-index-core/test/core-fixtures.test.mjs",
 		"test:quality-ratchet-kit": "node --test packages/quality-ratchet-kit/test/ratchet-kit.test.mjs",
+		"test:shibui-rhetoric": "node --test packages/shibui-rhetoric/test/rhetoric.test.mjs",
 		"test:sketches": "node --test packages/sketches/test/sketches.test.mjs",
 		"sync:workspace-health": "node scripts/sync-workspace-health.mjs --output src/data/workspace-health.json",
 		"build": "npm run generate-badges && npm run sync:vitals && npm run sync:omega && npm run sync:identity && astro build && npx pagefind --site dist --glob '**/*.html'",
