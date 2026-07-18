@@ -1,5 +1,17 @@
 import { defineConfig } from '@playwright/test';
 
+const browserOverride = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+	? {
+			launchOptions: {
+				executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+			},
+		}
+	: process.env.PLAYWRIGHT_BROWSER_CHANNEL
+		? {
+				channel: process.env.PLAYWRIGHT_BROWSER_CHANNEL,
+			}
+		: {};
+
 export default defineConfig({
 	testDir: '../src/e2e',
 	testMatch: '*.smoke.spec.ts',
@@ -11,6 +23,7 @@ export default defineConfig({
 	use: {
 		baseURL: 'http://127.0.0.1:4173/portfolio/',
 		headless: true,
+		...browserOverride,
 	},
 	projects: [
 		{
