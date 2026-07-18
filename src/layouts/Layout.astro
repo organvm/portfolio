@@ -64,7 +64,6 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://organvm.github.io').hr
     <FontFaces />
     <ClientRouter />
     <title>{title}</title>
-    <script is:inline defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js"></script>
     {
       import.meta.env.PUBLIC_CLARITY_ID && (
         <script is:inline define:vars={{ clarityId: import.meta.env.PUBLIC_CLARITY_ID }}>

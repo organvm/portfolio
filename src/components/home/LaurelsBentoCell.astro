@@ -1,15 +1,17 @@
 ---
 // src/components/home/LaurelsBentoCell.astro
-// Computed laurels cell (full width): live SVG from the LAVREA engine
-// (github.com/4444J99/laurea), recomputed daily in CI from the GitHub
-// API against cited baselines — the image updates without a site build.
+// Computed laurels cell (full width): SVG from the LAVREA engine
+// (github.com/4444J99/laurea), self-hosted in public/assets/ for
+// performance (eliminates raw.githubusercontent.com DNS+TLS cost).
+// Refresh the asset via: scripts/refresh-laurels-hero.sh
+import { base } from '../../utils/paths';
 ---
 
 <div class="bento-cell bento-cell--span-full laurels-cell">
 	<span class="laurels-cell__label">Computed laurels</span>
 	<a href="https://github.com/4444J99/laurea" class="laurels-cell__frame">
 		<img
-			src="https://raw.githubusercontent.com/4444J99/laurea/main/assets/cards/hero.svg"
+			src={`${base}assets/laurels-hero.svg`}
 			alt="Computed laurels — top 0.1% engineering throughput and a top-1% Python full-stack output profile, recomputed daily from live GitHub data"
 			width="800"
 			height="240"
