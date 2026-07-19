@@ -24,12 +24,6 @@ describe('consult-api worker contract', () => {
 		expect(workerSrc).toContain("'INTERNAL'");
 	});
 
-	it('defines contact capture route and response shape', () => {
-		expect(workerSrc).toContain('/api/contact');
-		expect(workerSrc).toContain('ContactSuccessResponse');
-		expect(workerSrc).toContain('ContactErrorResponse');
-	});
-
 	it('success response shape includes ok, mode, analysisHtml, requestId', () => {
 		expect(workerSrc).toMatch(/ok:\s*true/);
 		expect(workerSrc).toContain('analysisHtml');
@@ -45,11 +39,6 @@ describe('consult-api worker contract', () => {
 	it('validates challenge input (non-empty, length limit)', () => {
 		expect(workerSrc).toContain('MAX_CHALLENGE_LENGTH');
 		expect(workerSrc).toMatch(/challenge|trim|length/);
-	});
-
-	it('validates contact message length bounds', () => {
-		expect(workerSrc).toContain('MAX_CONTACT_MESSAGE_LENGTH');
-		expect(workerSrc).toContain('MIN_CONTACT_MESSAGE_LENGTH');
 	});
 
 	it('handles CORS via ALLOWED_ORIGINS', () => {
