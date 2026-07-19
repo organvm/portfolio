@@ -39,7 +39,11 @@ const HUB_FOOTER = [
 	'',
 	'**Explore the System**',
 	'',
-	'[Portfolio](https://4444j99.github.io/portfolio/) · [System Directory](https://4444j99.github.io/portfolio/directory/) · [49 Essays](https://organvm-v-logos.github.io/public-process/) · [Knowledge Base](https://organvm-i-theoria.github.io/my-knowledge-base/) · [Consult](https://4444j99.github.io/portfolio/consult/)',
+	'[Portfolio](https://4444j99.github.io/portfolio/)' +
+		' · [System Directory](https://4444j99.github.io/portfolio/directory/)' +
+		' · [49 Essays](https://organvm-v-logos.github.io/public-process/)' +
+		' · [Knowledge Base](https://organvm-i-theoria.github.io/my-knowledge-base/)' +
+		' · [Products](https://4444j99.github.io/portfolio/products/)',
 	'',
 	'</div>',
 	'<!-- PORTFOLIO-HUB-END -->',
