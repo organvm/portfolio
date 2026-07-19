@@ -1,20 +1,20 @@
 {
   "tests": {
-    "total": 0,
-    "passed": 0,
-    "suites": 0,
-    "status": "unknown"
+    "total": 289,
+    "passed": 289,
+    "suites": 87,
+    "status": "pass"
   },
   "security": {
-    "status": "unknown",
-    "vulnerabilities": 0,
-    "lastAudit": null
+    "status": "pass",
+    "vulnerabilities": 5,
+    "lastAudit": "2026-03-21T16:40:50.550Z"
   },
   "ecosystem": {
-    "totalRepos": 0,
-    "healthy": 0,
-    "errored": 0,
-    "status": "unknown"
+    "totalRepos": 85,
+    "healthy": 76,
+    "errored": 6,
+    "status": "pass"
   },
   "humanImpact": {
     "totalStudents": 2000,
@@ -26,8 +26,8 @@
       "approval": "Student evaluation approval rating across all teaching assignments"
     }
   },
-  "generatedAt": "2026-06-16T00:06:30.813Z",
-  "fingerprint": "CC0DCCD3",
+  "generatedAt": "2026-04-23T19:33:38.301Z",
+  "fingerprint": "FC0A0032",
   "strikes": {
     "total": 2,
     "conversionRate": 0

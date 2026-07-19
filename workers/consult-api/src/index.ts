@@ -18,17 +18,6 @@ interface ConsultRequestBody {
 	requestId?: unknown;
 }
 
-interface ContactRequestBody {
-	name?: unknown;
-	email?: unknown;
-	audience?: unknown;
-	offer?: unknown;
-	message?: unknown;
-	source?: unknown;
-	sourcePage?: unknown;
-	requestId?: unknown;
-}
-
 interface ConsultSuccessResponse {
 	ok: true;
 	mode: 'ai' | 'fallback';
@@ -42,19 +31,6 @@ interface ConsultSuccessResponse {
 interface ConsultErrorResponse {
 	ok: false;
 	code: 'BAD_INPUT' | 'AI_TIMEOUT' | 'AI_ERROR' | 'INTERNAL' | 'RATE_LIMITED' | 'NOT_FOUND';
-	message: string;
-	requestId: string;
-}
-
-interface ContactSuccessResponse {
-	ok: true;
-	requestId: string;
-	message: string;
-}
-
-interface ContactErrorResponse {
-	ok: false;
-	code: 'BAD_INPUT' | 'RATE_LIMITED' | 'INTERNAL';
 	message: string;
 	requestId: string;
 }
@@ -98,8 +74,6 @@ const MODEL = '@cf/meta/llama-3.1-8b-instruct';
 const AI_TIMEOUT_MS = 8000;
 const MAX_CHALLENGE_LENGTH = 4000;
 const MAX_BODY_BYTES = 16 * 1024;
-const MAX_CONTACT_MESSAGE_LENGTH = 4000;
-const MIN_CONTACT_MESSAGE_LENGTH = 20;
 const RATE_LIMIT_MAX = 12;
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const DEFAULT_KNOWLEDGE_API_URL = 'https://stakeholder-portal-ten.vercel.app/api/knowledge';
@@ -134,8 +108,6 @@ const INDUSTRY_LABELS: Record<string, string> = {
 	healthcare: 'Healthcare & Wellness',
 	other: 'Cross-domain',
 };
-
-const CONTACT_AUDIENCES = new Set(['clients', 'collaborators', 'investors']);
 
 // Minimal fallback data — used only when Knowledge API is unreachable
 const FALLBACK_ORGANS: FallbackOrgan[] = [
@@ -351,168 +323,6 @@ async function handleCheckout(request: Request, env: Env, corsHeaders: Headers):
 	}
 }
 
-function normalizeContactAudience(value: unknown): string {
-	if (typeof value !== 'string') return 'clients';
-	const normalized = value.trim().toLowerCase();
-	return CONTACT_AUDIENCES.has(normalized) ? normalized : 'clients';
-}
-
-function normalizeContactMessage(value: unknown): string {
-	return typeof value === 'string' ? value.trim() : '';
-}
-
-function normalizeContactText(value: unknown, maxLength: number): string {
-	return trimForStorage(typeof value === 'string' ? value.trim() : '', maxLength);
-}
-
-function isValidEmail(value: unknown): value is string {
-	return (
-		typeof value === 'string' &&
-		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) &&
-		value.trim().length <= 254
-	);
-}
-
-function buildContactPayload(body: ContactRequestBody): {
-	name: string | null;
-	email: string;
-	audience: string;
-	offer: string | null;
-	message: string;
-	source: string;
-	sourcePage: string;
-	requestId: string;
-} {
-	const name = normalizeContactText(body.name, 200) || null;
-	const email = isValidEmail(body.email) ? body.email.trim() : '';
-	const audience = normalizeContactAudience(body.audience);
-	const offer = normalizeContactText(body.offer, 200);
-	const message = normalizeContactMessage(body.message);
-	const source = normalizeContactText(body.source, 200) || 'products-gateway';
-	const sourcePage = normalizeContactText(body.sourcePage, 512);
-	const requestId =
-		typeof body.requestId === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(body.requestId.trim())
-			? body.requestId.trim()
-			: crypto.randomUUID();
-
-	return {
-		name,
-		email: email.trim(),
-		audience,
-		offer: offer || null,
-		message,
-		source,
-		sourcePage,
-		requestId,
-	};
-}
-
-async function handleContact(
-	request: Request,
-	env: Env,
-	ctx: ExecutionContext,
-	corsHeaders: Headers,
-): Promise<Response> {
-	const requestId = crypto.randomUUID();
-	const userAgent = request.headers.get('user-agent') || '';
-	const clientIp = request.headers.get('CF-Connecting-IP') || '';
-
-	const contentLength = Number(request.headers.get('content-length') || '0');
-	if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
-		return jsonResponse(
-			{
-				ok: false,
-				code: 'BAD_INPUT',
-				message: 'Request body too large.',
-				requestId,
-			} satisfies ContactErrorResponse,
-			413,
-			corsHeaders,
-		);
-	}
-
-	if (await isRateLimited(env, clientIp)) {
-		return jsonResponse(
-			{
-				ok: false,
-				code: 'RATE_LIMITED',
-				message: 'Too many requests. Please retry in a minute.',
-				requestId,
-			} satisfies ContactErrorResponse,
-			429,
-			corsHeaders,
-		);
-	}
-
-	let body: ContactRequestBody;
-	try {
-		body = (await request.json()) as ContactRequestBody;
-	} catch {
-		return jsonResponse(
-			{
-				ok: false,
-				code: 'BAD_INPUT',
-				message: 'Invalid JSON body.',
-				requestId,
-			} satisfies ContactErrorResponse,
-			400,
-			corsHeaders,
-		);
-	}
-
-	const payload = buildContactPayload(body);
-	const messageLength = payload.message.length;
-	if (!payload.email) {
-		return jsonResponse(
-			{
-				ok: false,
-				code: 'BAD_INPUT',
-				message: 'Valid email is required.',
-				requestId: payload.requestId,
-			} satisfies ContactErrorResponse,
-			400,
-			corsHeaders,
-		);
-	}
-	if (messageLength < MIN_CONTACT_MESSAGE_LENGTH || messageLength > MAX_CONTACT_MESSAGE_LENGTH) {
-		return jsonResponse(
-			{
-				ok: false,
-				code: 'BAD_INPUT',
-				message: `Message must be between ${MIN_CONTACT_MESSAGE_LENGTH} and ${MAX_CONTACT_MESSAGE_LENGTH} characters.`,
-				requestId: payload.requestId,
-			} satisfies ContactErrorResponse,
-			400,
-			corsHeaders,
-		);
-	}
-
-	ctx.waitUntil(
-		logContact(env, {
-			id: payload.requestId,
-			name: payload.name,
-			email: payload.email,
-			audience: payload.audience,
-			offer: payload.offer,
-			message: payload.message,
-			source: payload.source,
-			sourcePage: payload.sourcePage,
-			ip: clientIp,
-			userAgent,
-		}),
-	);
-
-	return jsonResponse(
-		{
-			ok: true,
-			requestId: payload.requestId,
-			message: 'Contact request captured.',
-		} satisfies ContactSuccessResponse,
-		200,
-		corsHeaders,
-	);
-}
-
 async function verifyStripeSignature(
 	payload: string,
 	sigHeader: string,
@@ -601,10 +411,6 @@ export default {
 
 		if (request.method === 'POST' && url.pathname === '/api/stripe-webhook') {
 			return handleStripeWebhook(request, env, corsHeaders);
-		}
-
-		if (request.method === 'POST' && url.pathname === '/api/contact') {
-			return handleContact(request, env, ctx, corsHeaders);
 		}
 
 		if (request.method !== 'POST' || url.pathname !== '/api/consult') {
@@ -1109,57 +915,5 @@ async function logConsult(
 			.run();
 	} catch (error) {
 		console.error('consult log write failed', error);
-	}
-}
-
-async function logContact(
-	env: Env,
-	payload: {
-		id: string;
-		name: string | null;
-		email: string;
-		audience: string;
-		offer: string | null;
-		message: string;
-		source: string;
-		sourcePage: string;
-		ip: string;
-		userAgent: string;
-	},
-): Promise<void> {
-	if (!env.CONSULT_DB) return;
-	try {
-		const ipHash = await hashIp(payload.ip, getLogSalt(env));
-		await env.CONSULT_DB.prepare(`
-        INSERT INTO contact_logs (
-          id,
-          created_at,
-          name,
-          email,
-          audience,
-          offer,
-          message,
-          source,
-          source_page,
-          ip_hash,
-          user_agent
-        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
-      `)
-			.bind(
-				payload.id,
-				new Date().toISOString(),
-				payload.name,
-				payload.email,
-				payload.audience,
-				payload.offer,
-				payload.message,
-				payload.source,
-				payload.sourcePage,
-				ipHash,
-				trimForStorage(payload.userAgent, 512),
-			)
-			.run();
-	} catch (error) {
-		console.error('contact log write failed', error);
 	}
 }
