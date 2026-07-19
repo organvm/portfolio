@@ -25,7 +25,6 @@ const URLS = [
 	'dashboard/index.html',
 	'projects/orchestration-hub/index.html',
 	'gallery/index.html',
-	'products/index.html',
 	'consult/index.html',
 ];
 
