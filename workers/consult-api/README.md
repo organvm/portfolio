@@ -1,10 +1,11 @@
 # Consult API Worker
 
-Cloudflare Worker backend for `/api/consult`.
+Cloudflare Worker backend for `/api/consult` and `/api/contact`.
 
 ## What it does
 
 - Accepts public consult requests from the portfolio consult page.
+- Accepts contact capture submissions from the products gateway (`/products`) surface.
 - Attempts Workers AI inference (`@cf/meta/llama-3.1-8b-instruct`).
 - Falls back to deterministic capability mapping if AI fails or times out.
 - Logs full request records to D1 (`consult_logs`).
@@ -60,6 +61,49 @@ Error JSON:
   "message": "Challenge must be between 20 and 4000 characters.",
   "requestId": "uuid"
 }
+
+`POST /api/contact`
+
+Request JSON:
+
+```json
+{
+  "name": "Jordan Lee",
+  "email": "jordan@example.com",
+  "audience": "clients",
+  "offer": "gamified-coach-interface",
+  "message": "We need a pilot for an internal coaching dashboard.",
+  "source": "products-gateway",
+  "sourcePage": "/products/?audience=clients#contact-form",
+  "requestId": "uuid"
+}
+```
+
+Success JSON:
+
+```json
+{
+  "ok": true,
+  "requestId": "uuid",
+  "message": "Contact request captured."
+}
+```
+
+Error JSON:
+
+```json
+{
+  "ok": false,
+  "code": "BAD_INPUT",
+  "message": "Message must be between 20 and 4000 characters.",
+  "requestId": "uuid"
+}
+```
+
+D1 schema:
+
+- `consult_logs` continues to store `/api/consult` request telemetry.
+- `contact_logs` stores `/api/contact` intake payload summaries (name/email/audience/message metadata and IP hash for rate-limiting correlation).
 ```
 
 ## Setup
@@ -83,6 +127,7 @@ npx wrangler d1 create portfolio-consult-logs
 ```bash
 npx wrangler d1 migrations apply portfolio-consult-logs --config workers/consult-api/wrangler.jsonc --remote
 ```
+If the worker has already run migration `0001` in this environment, run again to apply `0002_create_contact_logs.sql`.
 
 5. Set secrets:
 

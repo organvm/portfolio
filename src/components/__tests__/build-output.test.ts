@@ -135,6 +135,22 @@ describeBuiltOutput('project pages', () => {
 	});
 });
 
+describeBuiltOutput('products offer page', () => {
+	const doc = loadPage('products/index.html');
+
+	it('exists', () => {
+		expect(doc).not.toBeNull();
+	});
+
+	it('has a title', () => {
+		expect(doc!.querySelector('title')?.textContent).toBeTruthy();
+	});
+
+	it('has contact form for default capture', () => {
+		expect(doc!.querySelectorAll('#offer-contact-form').length).toBe(1);
+	});
+});
+
 describeBuiltOutput('resume page', () => {
 	const doc = loadPage('resume/index.html');
 
