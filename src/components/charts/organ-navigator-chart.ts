@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { base } from '../../utils/paths';
 import { getChartTheme } from './chart-theme';
 import { createTooltip } from './chart-utils';
 
@@ -225,9 +226,6 @@ export default function organNavigatorChart(container: HTMLElement, data: Record
 
 		// Click project → navigate
 		projectNodes.on('click', (_event: MouseEvent, p: ProjectNode) => {
-			const base =
-				document.querySelector<HTMLAnchorElement>('.header__logo')?.getAttribute('href') ||
-				'/portfolio/';
 			window.location.href = `${base}projects/${p.slug}/`;
 		});
 
