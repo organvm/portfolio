@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" role="img" aria-label="pages: 102">
-  <title>pages: 102</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" role="img" aria-label="pages: 104">
+  <title>pages: 104</title>
   <linearGradient id="s" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
     <stop offset="1" stop-opacity=".1"/>
@@ -13,7 +13,7 @@
   <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
     <text x="23.5" y="15" fill="#010101" fill-opacity=".3">pages</text>
     <text x="23.5" y="14">pages</text>
-    <text x="63.5" y="15" fill="#010101" fill-opacity=".3">102</text>
-    <text x="63.5" y="14">102</text>
+    <text x="63.5" y="15" fill="#010101" fill-opacity=".3">104</text>
+    <text x="63.5" y="14">104</text>
   </g>
 </svg>

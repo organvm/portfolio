@@ -1,36 +1,19 @@
 {
   "repos": {
-    "total": 149,
-    "active": 93,
-    "orgs": 10
+    "total": 116,
+    "active": 62,
+    "orgs": 8
   },
   "substance": {
-    "code_files": 2980,
-    "test_files": 400,
+    "code_files": 23121,
+    "test_files": 4337,
     "automated_tests": 2000,
-    "ci_passing": 107,
+    "ci_passing": 104,
     "ci_coverage_pct": 72
   },
   "logos": {
-    "essays": 29,
-    "words": 300000
+    "essays": 49,
+    "words": 740907
   },
-  "timestamp": "2026-06-19T11:03:23.629967+00:00",
-  "organism": {
-    "density": 0.252,
-    "entities": 149,
-    "edges": 0,
-    "ammoi": "AMMOI:25% E:0 T:0 C:0 Ev24h:2 [ORGAN-VI:76%, ORGAN-VII:75%, META-ORGANVM:63%]"
-  },
-  "omega": {
-    "met": 5,
-    "total": 20
-  },
-  "promotion_pipeline": {
-    "ARCHIVED": 53,
-    "CANDIDATE": 1,
-    "GRADUATED": 59,
-    "LOCAL": 28,
-    "PUBLIC_PROCESS": 8
-  }
+  "timestamp": "2026-06-15T11:56:37.290279+00:00"
 }
