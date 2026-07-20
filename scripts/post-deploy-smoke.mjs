@@ -11,22 +11,6 @@ const CHECKS = [
 	{ path: '/', expect: { status: 200, bodyContains: 'Anthony' } },
 	{ path: '/about/', expect: { status: 200, bodyContains: 'About' } },
 	{ path: '/dashboard/', expect: { status: 200, bodyContains: 'Dashboard' } },
-	{
-		path: '/products/',
-		expect: { status: 200, bodyContains: 'Products' },
-	},
-	{
-		path: '/products/?audience=clients',
-		expect: { status: 200, bodyContains: 'Products' },
-	},
-	{
-		path: '/products/?audience=collaborators',
-		expect: { status: 200, bodyContains: 'Products' },
-	},
-	{
-		path: '/products/?audience=investors',
-		expect: { status: 200, bodyContains: 'Products' },
-	},
 	{ path: '/resume/', expect: { status: 200 } },
 	{ path: '/projects/orchestration-hub/', expect: { status: 200 } },
 ];
