@@ -44,6 +44,10 @@ function initializeRepo(): { dir: string; baseSha: string; headSha: string } {
 	git(dir, 'init -q');
 	git(dir, 'config user.email "test@example.com"');
 	git(dir, 'config user.name "Test Runner"');
+	// Keep the fixture hermetic: never inherit ambient commit/tag signing config,
+	// which would make these commits fail in environments that enforce signing.
+	git(dir, 'config commit.gpgsign false');
+	git(dir, 'config tag.gpgsign false');
 	git(dir, 'add .');
 	git(dir, 'commit -m "base" --quiet');
 	const baseSha = git(dir, 'rev-parse HEAD');
