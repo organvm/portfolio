@@ -1,115 +1,85 @@
 cv:
   name: Anthony James Padavano
-  headline: Creative Technologist
+  headline: Software Engineer — Backend, Platform & AI Infrastructure
   location: New York City
   email:
     - padavano.anthony@gmail.com
   website:
-    - https://4444j99.github.io/portfolio/
+    - https://organvm.github.io/portfolio/
   social_networks:
     - network: GitHub
       username: 4444j99
   sections:
     summary:
-      - "Creative technologist and artist-engineer with 10+ years across multimedia production, systems design, and AI development. Ships production infrastructure — 3,586 code files, 736 test files, 58 passing CI workflows across 91 repositories and 8 GitHub organizations with ~386K words of public documentation. Achieved +17.5M views and helped raise $2M across 15 client campaigns (2011–2024). MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
+      - "I build production systems that solve expensive problems — not demos, but live platforms that are tested, deployed, and running. Backend and platform engineer with a testing-first discipline: I own systems end-to-end across data, infrastructure, AI, and deployment. Sole architect of a 309-repository system across 8 GitHub organizations governed by a self-healing CI/CD fleet. Meta-certified Full-Stack Developer with 12+ years shipping software, infrastructure, and content at scale. Python and TypeScript, end to end."
     skills:
-      - label: Languages
-        details: Python, TypeScript, JavaScript, Rust, Bash, SQL
-      - label: Frameworks
-        details: Node.js, Astro, React, Next.js, FastAPI, Fastify, Express, p5.js, D3.js
-      - label: AI / ML
-        details: "LLM orchestration, multi-agent systems (1,095+ tests), prompt engineering, vector search (ChromaDB), model-agnostic (Anthropic/OpenAI/Ollama)"
+      - label: Backend
+        details: "Python, FastAPI, Fastify, Express, Node.js, PostgreSQL, Redis, REST APIs, event-driven services"
       - label: Infrastructure
-        details: "GitHub Actions (58 CI workflows), Docker, Terraform (AWS), PostgreSQL, Redis, Git"
+        details: "Docker, Terraform (AWS — multi-AZ RDS, ElastiCache, S3), GitHub Actions CI/CD, Cloudflare Workers, Nginx, GCP"
+      - label: "AI / ML"
+        details: "Multi-agent orchestration, Claude Agent SDK, LLM pipelines, model-agnostic (Anthropic/OpenAI/Ollama), vector search (ChromaDB)"
+      - label: Languages
+        details: "Python, TypeScript, JavaScript, Rust, SQL, Bash"
       - label: "Testing & Quality"
-        details: "pytest, Vitest, Jest, TDD — 736 test files across 56 repos, 4,000+ automated tests"
-      - label: Creative
-        details: "p5.js (32 generative sketches), D3.js, generative art, audio synthesis, interactive installations"
-      - label: Marketing
-        details: Storytelling, content creation, social media management, SEO optimization, performance analytics, UI/UX design
-      - label: Governance
-        details: Registry design, dependency validation, state machines, documentation systems
+        details: "pytest, Vitest, Jest, TDD, ruff, CodeQL — CI-gated across the fleet"
+      - label: "Frontend & Tooling"
+        details: "React, Next.js, Astro, Vite, pnpm monorepos, Zod, YAML/JSON Schema, Git"
     selected projects:
-      - name: The Eight-Organ System
+      - name: "50-State Public-Record Data Platform"
         date: "2024 — Present"
         highlights:
-          - Designed orchestration architecture coordinating theory, art, commerce, community, and marketing as a single governed system
-          - Built machine-readable registry, automated dependency validation (31 edges, zero back-edge violations), and promotion state machine
-          - "Authored ~386K words of public documentation; 5 GitHub Actions workflows for autonomous governance"
-      - name: Recursive Engine (RE:GE)
+          - "Backend platform ingesting public records across all 50 U.S. states — 60+ collection agents, PostgreSQL, deployed on Terraform-provisioned AWS (multi-AZ RDS, Redis/ElastiCache, S3)"
+          - "3,399 passing tests with circuit breakers, rate limiting, and graceful degradation for reliable large-scale collection"
+      - name: "Peer-Audited Behavioral Blockchain"
         date: "2024 — Present"
         highlights:
-          - "Implemented 21 organ handlers translating epistemological frameworks into executable code with a ritual syntax DSL"
-          - "1,254 tests, 85% coverage; myths, identities, and recursive structures as first-class computational objects"
-      - name: Agentic Titan
+          - "NestJS + Next.js + React Native + Tauri monorepo with Stripe escrow and a double-entry ledger; SHA-256 hash-chained audit log"
+          - "1,107 tests behind CodeQL and CI gates; live pitch surface serving 200 OK"
+      - name: "Agentic Titan — Multi-Agent Orchestrator"
         date: "2024 — Present"
         highlights:
-          - "Polymorphic agent swarm architecture across 9 self-organizing topologies with 22 agent archetypes; FastAPI dashboard"
-          - "1,095+ tests across 18 implementation phases; model-agnostic (Anthropic, OpenAI, Ollama); Redis, Celery, Ray Serve"
-      - name: AI-Conductor Model
+          - "Model-agnostic orchestration framework coordinating Claude, Codex, and Gemini across 9 self-organizing topologies with a FastAPI control dashboard"
+          - "1,095+ tests; Redis task queuing, Celery workers, Ray Serve deployment"
+      - name: "Limen — Self-Healing Agent Fleet"
         date: "2024 — Present"
         highlights:
-          - "Developed the workflow producing ~386K words: AI generates volume, human directs and refines"
-          - "Includes quality gates, template compliance validation, and automated link checking across 91 repos"
-      - name: Forward Funders Marketing Overhaul
-        date: "2020"
+          - "Heartbeat-driven autonomic infrastructure that governs 309 repositories with a 9-rung organ ladder — task intake, dispatch, verification, and merge with near-zero manual upkeep"
+          - "Budget-capped, persona-gated task system with a FastAPI/Cloudflare-Worker runtime and GitHub-native storage"
+      - name: "AI Chat Exporter"
+        date: "2024 — Present"
         highlights:
-          - "Transitioned client from in-person cold-calling to fully digital marketing; designed social media and Google Ads campaigns achieving 328% ROI"
-      - name: Boca Ballet Theatre Digital Transformation
-        date: "2020"
-        highlights:
-          - "Rebuilt website and social media channels during COVID-19; ad campaigns drove funding and enabled remote performances, keeping doors open"
+          - "~5,900-line TypeScript tool, 5 export formats, 9-language UI; 170 tests, 549 commits"
+          - "Distributed across GreasyFork, GitHub, Docker, and Cloudflare Pages"
     experience:
-      - company: Independent
-        position: Creative Technologist
-        start_date: 2021
+      - company: ORGANVM (Independent)
+        position: Software Engineer & Developer-Tools Builder
+        start_date: 2020
         location: New York City
         highlights:
-          - Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with automated dependency validation and ~386K words of documentation
-          - "Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python"
-          - Developed generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation
+          - "Designed and operate a 309-repository production system across 8 GitHub organizations, governed by a self-healing CI/CD fleet with automated dependency validation and promotion state machines"
+          - "Built backend platforms and developer tooling in Python and TypeScript — data pipelines, multi-agent AI orchestration, MCP gateways, and reliable automation — deployed on Docker, Terraform/AWS, and Cloudflare"
+          - "Testing-first throughout: thousands of automated tests behind GitHub Actions CI gates across the estate"
       - company: Miami Dade College Foundation
         position: Digital Marketing Manager
         start_date: 2023
         end_date: 2024
         location: Miami, FL
         highlights:
-          - Designed and executed digital campaigns increasing donor engagement by 32% and surpassing fundraising goals
-          - "Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions"
-          - Produced multimedia storytelling content driving 28% increase in click-through rates
-          - "Developed social media strategy boosting engagement rates across platforms by 23%"
-          - "Trained team members on advanced analytics tools, leading to 20% efficiency boost in reporting"
+          - "Rebuilt the foundation website and ran data-driven campaigns that increased donor engagement 32% and improved donation conversions"
+      - company: "Broward College, FAU, Miami Dade College, Nova Southeastern, Keiser, and others"
+        position: Instructor — Composition & Writing
+        start_date: 2015
+        location: Remote / South Florida
+        highlights:
+          - "Designed and taught 100+ college composition courses to 2,000+ students across 8+ institutions; built accessible, analytics-informed curricula"
       - company: AJP Media Arts
         position: Multimedia Specialist
         start_date: 2011
+        end_date: 2020
         location: New York City
         highlights:
-          - "Produced video, audio, and visual campaigns achieving 17.5M+ views and contributing to $2M in client fundraising and revenue across 15 clients (2011–2024)"
-          - Integrated SEO and paid media strategies achieving 290% ROI for key campaigns
-          - Launched and managed client websites with 42% engagement increase and 30% speed improvement
-          - "Conducted A/B testing and performance analysis to optimize campaigns, achieving 27% engagement boost"
-          - "Delivered intuitive UI/UX designs for client platforms — 26% satisfaction increase, 35% retention improvement"
-        additional_info: "Clients: Arts in Boca, Boca Ballet Theatre, Cardboard Movie Company, Forward Funding, Flux Media, Lockbox Capital, Luxury Elevates, MindFinity, Nintendard, South Florida Luxury Real Estate, Spartan Permits, StrategicLever, Swamp Ape Review, Transcend Cosmetics, UltiTool Media"
-      - company: "Miami Dade College, FAU, Nova Southeastern, Keiser, Young Harris College, Tarrant County Community College, Broward College, Palm Beach State College"
-        position: Instructor
-        start_date: 2015
-        location: South Florida
-        highlights:
-          - Designed and delivered 100+ composition courses to 2,000+ students with 85% above-average grade achievement
-          - "Applied UX principles to create accessible course materials — 92% student approval rating"
-          - "Managed course lifecycle from concept to completion, achieving 97% course completion rate"
-          - "Enhanced lectures with multimedia tools, driving 22% increase in engagement"
-          - "Refined teaching methods using performance analytics — 24% improvement in student retention"
-      - company: Majestic Design
-        position: Project Manager
-        start_date: 2007
-        end_date: 2018
-        location: New York City
-        highlights:
-          - "Led 50 commercial and residential construction projects from concept to completion — 90% on-time and within budget"
-          - "Collaborated with marketing teams on 3D renderings and video walkthroughs, securing 25% increase in repeat business"
-          - "Built and maintained strong client and subcontractor relationships — 88% satisfaction rate"
-          - "Implemented risk mitigation strategies reducing project delays by 15%; 93% of projects met or exceeded standards"
+          - "Produced video, audio, and web campaigns for arts and nonprofit clients — 17.5M+ views and $2M in attributed client fundraising"
     education:
       - institution: Florida Atlantic University
         area: Creative Writing
@@ -123,13 +93,13 @@ cv:
         end_date: 2014
     certifications:
       - label: "Full-Stack Developer — Meta"
-        details: "2023 — 2024"
+        details: "2024"
       - label: "UX Design — Google"
-        details: "2022 — 2023"
+        details: "2023"
       - label: "Digital Marketing & E-commerce — Google"
-        details: "2022 — 2023"
+        details: "2023"
       - label: "Project Management — Google"
-        details: "2022 — 2023"
+        details: "2023"
 
 design:
   theme: classic
