@@ -1,0 +1,8 @@
+# Netlify serves this site at the ROOT domain (4444j99-portfolio.netlify.app),
+# but the Astro build bakes in `base: '/portfolio'` for the GitHub Pages deploy
+# (organvm.github.io/portfolio/). Without this rule every asset/nav URL is emitted
+# as `/portfolio/...`, which 404s on the Netlify root and renders the site as
+# unstyled raw HTML. This rewrite (status 200, not a 3xx redirect) serves the
+# real root-level file for any `/portfolio/*` request, fixing Netlify while
+# leaving the Pages subpath deploy untouched.
+/portfolio/*  /:splat  200
