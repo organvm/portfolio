@@ -34,7 +34,7 @@ The project is organized around the **ORGANVM** system—a polymathic framework 
 
 ---
 
-## 🏗️ System Architecture
+## Architecture
 
 This repository acts as the **Logos** (Organ V) node, coordinating data and vitals from across the system.
 
@@ -124,12 +124,12 @@ npm run test           # Vitest unit + integration
 npm run test:watch     # Vitest in watch mode
 npm run test:coverage  # Coverage report (V8 provider)
 
-# Require npm run build first:
+## Require npm run build first:
 npm run test:a11y            # axe-core audit on built HTML
 npm run test:e2e:smoke       # Playwright smoke (mobile + desktop viewports)
 npm run test:runtime:errors  # Runtime error telemetry
 
-# Workspace packages (Node built-in test runner, not Vitest):
+## Workspace packages (Node built-in test runner, not Vitest):
 npm run test:github-pages-core
 npm run test:quality-ratchet-kit
 npm run test:shibui-rhetoric
@@ -151,16 +151,16 @@ npm run generate-data     # Regenerate src/data/ from sibling Python repo
 Requires the `gemini` CLI. Falls back to `[DRAFT]` templates when unavailable.
 
 ```bash
-# Create a strike target (defaults to systems-architect persona)
+## Create a strike target (defaults to systems-architect persona)
 npm run strike:new "Company Name" "Role Title"
 
-# Specify a persona from src/data/personas.json
+## Specify a persona from src/data/personas.json
 npm run strike:new "Company Name" "Role Title" "persona-id"
 
-# AI-discover candidates per persona → src/data/scout-candidates.json
+## AI-discover candidates per persona → src/data/scout-candidates.json
 npm run strike:scout
 
-# Batch-process intake/job-descriptions/ directory
+## Batch-process intake/job-descriptions/ directory
 npm run strike:sweep
 ```
 
