@@ -1,8 +1,9 @@
 # Portfolio — Anthony James Padavano
 
+Personal portfolio showcasing 19 case studies, p5.js generative art, and a live engineering dashboard. The central node of the ORGANVM eight-organ creative-institutional system.
+
 <div align="center">
   <img src="public/favicon.svg" width="120" height="120" alt="ORGANVM Logo" />
-  <h3>The central node of an Eight-Organ Creative-Institutional System.</h3>
   
   [![Live Site](https://img.shields.io/badge/Live-organvm.github.io/portfolio-00BCD4?style=for-the-badge&logo=github)](https://organvm.github.io/portfolio/)
   [![CI](https://github.com/organvm/portfolio/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/organvm/portfolio/actions/workflows/ci.yml)
@@ -11,9 +12,9 @@
 
 ---
 
-## 🔭 Overview
+## Overview
 
-Personal portfolio site showcasing 19 project case studies, an interactive p5.js generative hero, and a live engineering dashboard. The project is organized around the **ORGANVM** system—a polymathic framework spanning 171 repositories and 8 GitHub organizations.
+The project is organized around the **ORGANVM** system—a polymathic framework spanning 171 repositories and 8 GitHub organizations.
 
 *   **Live Hub:** [organvm.github.io/portfolio](https://organvm.github.io/portfolio/)
 *   **Architecture:** [The Eight-Organ System](https://github.com/meta-organvm)
@@ -33,7 +34,7 @@ Personal portfolio site showcasing 19 project case studies, an interactive p5.js
 
 ---
 
-## 🏗️ System Architecture
+## Architecture
 
 This repository acts as the **Logos** (Organ V) node, coordinating data and vitals from across the system.
 
@@ -123,12 +124,12 @@ npm run test           # Vitest unit + integration
 npm run test:watch     # Vitest in watch mode
 npm run test:coverage  # Coverage report (V8 provider)
 
-# Require npm run build first:
+## Require npm run build first:
 npm run test:a11y            # axe-core audit on built HTML
 npm run test:e2e:smoke       # Playwright smoke (mobile + desktop viewports)
 npm run test:runtime:errors  # Runtime error telemetry
 
-# Workspace packages (Node built-in test runner, not Vitest):
+## Workspace packages (Node built-in test runner, not Vitest):
 npm run test:github-pages-core
 npm run test:quality-ratchet-kit
 npm run test:shibui-rhetoric
@@ -150,16 +151,16 @@ npm run generate-data     # Regenerate src/data/ from sibling Python repo
 Requires the `gemini` CLI. Falls back to `[DRAFT]` templates when unavailable.
 
 ```bash
-# Create a strike target (defaults to systems-architect persona)
+## Create a strike target (defaults to systems-architect persona)
 npm run strike:new "Company Name" "Role Title"
 
-# Specify a persona from src/data/personas.json
+## Specify a persona from src/data/personas.json
 npm run strike:new "Company Name" "Role Title" "persona-id"
 
-# AI-discover candidates per persona → src/data/scout-candidates.json
+## AI-discover candidates per persona → src/data/scout-candidates.json
 npm run strike:scout
 
-# Batch-process intake/job-descriptions/ directory
+## Batch-process intake/job-descriptions/ directory
 npm run strike:sweep
 ```
 
@@ -217,6 +218,14 @@ Enjoying the work? Support development through:
 - **[Payrail](https://payrail.ivixivi.workers.dev/pay)** — One-time or flexible contributions
 
 Your support fuels the ORGANVM ecosystem and keeps these tools free and open.
+
+---
+
+## Contact
+
+Have a question or opportunity? Connect on [GitHub](https://github.com/4444J99).
+
+---
 
 ## ⚖️ License
 
