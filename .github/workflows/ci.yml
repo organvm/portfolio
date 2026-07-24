@@ -98,6 +98,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: E2E Smoke Tests
         run: npm run test:e2e:smoke
+      - name: Runtime Error Telemetry
+        run: npm run test:runtime:errors
       - name: Unit Tests
         run: npm run test:coverage
       - name: Package Fixture Tests
